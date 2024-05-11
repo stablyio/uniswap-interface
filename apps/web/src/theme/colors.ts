@@ -103,13 +103,13 @@ export const colors = {
   neutral1_dark: '#FFFFFF',
   neutral2_dark: '#9B9B9B',
   neutral3_dark: '#5E5E5E',
-  surface1_dark: '#131313',
-  surface2_dark: '#1B1B1B',
+  surface1_dark: '#424242',
+  surface2_dark: '#212121',
   surface3_dark: '#FFFFFF12',
   surface4_dark: '#FFFFFF20',
   surface5_dark: '#00000004',
-  accent1_dark: '#FC72FF',
-  accent2_dark: '#311C31',
+  accent1_dark: '#6B00F0',
+  accent2_dark: '#8801FF',
   accent3_dark: '#4C82FB',
   neutral1_light: '#222222',
   neutral2_light: '#7D7D7D',
@@ -127,9 +127,9 @@ export const colors = {
   critical2_dark: '#2E0805',
   critical2_light: '#FFF2F1',
   scrim: 'rgba(0, 0, 0, 0.60)',
-}
+};
 
-export type ThemeColors = typeof darkTheme
+export type ThemeColors = typeof darkTheme;
 
 const commonTheme = {
   white: colors.white,
@@ -160,7 +160,7 @@ const commonTheme = {
 
   brandedGradient: 'linear-gradient(139.57deg, #FF79C9 4.35%, #FFB8E2 96.44%);',
   promotionalGradient: colors.accent1_light,
-}
+};
 
 export const darkTheme = {
   ...commonTheme,
@@ -191,7 +191,7 @@ export const darkTheme = {
   scrim: colors.scrim,
 
   warning2: colors.gold200,
-}
+};
 
 export const lightTheme: ThemeColors = {
   ...commonTheme,
@@ -222,4 +222,4 @@ export const lightTheme: ThemeColors = {
   scrim: colors.scrim,
 
   warning2: colors.gold200,
-}
+};

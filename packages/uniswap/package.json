@@ -10,7 +10,7 @@
     "graphql:generate": "graphql-codegen --config codegen.ts",
     "graphql:schema": "get-graphql-schema https://api.uniswap.org/v1/graphql -h Origin=https://app.uniswap.org > ./src/data/graphql/uniswap-data-api/schema.graphql",
     "i18n:generate": "i18next-resources-for-ts interface -i ./src/i18n/locales/source -o ./src/i18n/locales/@types/resources.d.ts",
-    "lint": "eslint . --ext ts,tsx --max-warnings=0",
+    "lint": "eslint . --ext ts,tsx --max-warnings=0 --cache --cache-location ../../eslint_cache/uniswap",
     "lint:fix": "eslint . --ext ts,tsx --fix",
     "test": "jest --passWithNoTests",
     "snapshots": "jest -u",

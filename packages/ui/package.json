@@ -49,7 +49,7 @@
     "build": "tamagui-build --ignore-base-url",
     "build:icons": "node -r esbuild-register ./src/scripts/componentize-icons.ts",
     "check:deps:usage": "depcheck",
-    "lint": "eslint src --max-warnings=0",
+    "lint": "eslint src --max-warnings=0 --cache --cache-location ../../eslint_cache/ui",
     "lint:fix": "eslint src --fix",
     "typecheck": "tsc -b",
     "watch": "yarn build --watch"

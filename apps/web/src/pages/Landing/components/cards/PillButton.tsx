@@ -1,8 +1,8 @@
-import { motion, MotionProps } from 'framer-motion'
-import styled from 'styled-components'
+import { motion, MotionProps } from 'framer-motion';
+import styled from 'styled-components';
 
-import { Box } from '../Generics'
-import { ArrowRight } from '../Icons'
+import { Box } from '../Generics';
+import { ArrowRight } from '../Icons';
 
 const Button = styled(motion.button)<{ cursor?: string }>`
   display: flex;
@@ -16,17 +16,17 @@ const Button = styled(motion.button)<{ cursor?: string }>`
   overflow: hidden;
   cursor: ${({ cursor }) => cursor ?? 'pointer'};
   flex: none;
-`
+`;
 const Slider = styled(motion.div)`
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   gap: 8px;
-`
+`;
 const Label = styled.span`
   color: ${(props) => props.color};
-  font-family: Basel;
+  font-family: 'Courier New';
   font-size: 20px;
   @media (max-width: 1024px) {
     font-size: 18px;
@@ -35,24 +35,24 @@ const Label = styled.span`
   font-weight: 535;
   line-height: 24px; /* 120% */
   flex: none;
-`
+`;
 type OpacityProps = {
-  opacity: number
-}
+  opacity: number;
+};
 const Opacity = styled(motion.div)<OpacityProps & MotionProps>`
   flex: 0;
   display: flex;
   overflow: visible;
   opacity: ${(props) => props.opacity};
-`
+`;
 
 type PillButtonProps = {
-  label: string
-  icon: React.ReactNode
-  color?: string
-  cursor?: string
-  onClick?: () => void
-}
+  label: string;
+  icon: React.ReactNode;
+  color?: string;
+  cursor?: string;
+  onClick?: () => void;
+};
 
 export function PillButton(props: PillButtonProps) {
   const variants = {
@@ -62,7 +62,7 @@ export function PillButton(props: PillButtonProps) {
     hover: {
       x: -24,
     },
-  }
+  };
   const icnVars = {
     intial: {
       opacity: 1,
@@ -70,7 +70,7 @@ export function PillButton(props: PillButtonProps) {
     hover: {
       opacity: 0,
     },
-  }
+  };
 
   const arrowVars = {
     intial: {
@@ -79,7 +79,7 @@ export function PillButton(props: PillButtonProps) {
     hover: {
       opacity: 1,
     },
-  }
+  };
 
   return (
     <Button transition={{ delayChildren: 0 }} cursor={props.cursor}>
@@ -95,5 +95,5 @@ export function PillButton(props: PillButtonProps) {
         </Opacity>
       </Slider>
     </Button>
-  )
+  );
 }

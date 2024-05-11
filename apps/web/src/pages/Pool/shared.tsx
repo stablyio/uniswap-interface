@@ -1,13 +1,13 @@
-import { ButtonGray } from 'components/Button'
-import { Pool } from 'components/Icons/Pool'
-import { FlyoutAlignment, Menu } from 'components/Menu'
-import { Trans, t } from 'i18n'
-import { ChevronDown } from 'react-feather'
-import { useModalIsOpen } from 'state/application/hooks'
-import { ApplicationModal } from 'state/application/reducer'
-import styled, { css } from 'styled-components'
-import { ThemedText } from 'theme/components'
-import { ProtocolVersion } from 'uniswap/src/data/graphql/uniswap-data-api/__generated__/types-and-hooks'
+import { ButtonGray } from 'components/Button';
+import { Pool } from 'components/Icons/Pool';
+import { FlyoutAlignment, Menu } from 'components/Menu';
+import { Trans, t } from 'i18n';
+import { ChevronDown } from 'react-feather';
+import { useModalIsOpen } from 'state/application/hooks';
+import { ApplicationModal } from 'state/application/reducer';
+import styled, { css } from 'styled-components';
+import { ThemedText } from 'theme/components';
+import { ProtocolVersion } from 'uniswap/src/data/graphql/uniswap-data-api/__generated__/types-and-hooks';
 
 const PoolVersionItem = styled.div`
   align-items: center;
@@ -15,19 +15,18 @@ const PoolVersionItem = styled.div`
   justify-content: space-between;
   width: 100%;
   gap: 12px;
-`
+`;
 
 const PoolOptionsButton = styled(ButtonGray)<{ $isOpen: boolean }>`
   flex: 1 1 auto;
   padding: 6px 8px 6px 12px;
   width: 100%;
-  background-color: ${({ theme }) => theme.surface3};
-  border: none;
+  background-color: ${({ theme }) => theme.surface1};
+  border: ${({ theme }) => `1px solid ${theme.surface1}`};
   border-radius: 8px;
   gap: 6px;
 
   &:hover {
-    background-color: ${({ theme, $isOpen }) => ($isOpen ? theme.surface1 : theme.surface3)};
     opacity: 0.9;
   }
 
@@ -37,7 +36,7 @@ const PoolOptionsButton = styled(ButtonGray)<{ $isOpen: boolean }>`
       background-color: ${({ theme }) => theme.surface1};
       border: ${({ theme }) => `1.5px solid ${theme.neutral3}`};
     `}
-`
+`;
 
 const StyledChevron = styled(ChevronDown)<{ $isOpen: boolean }>`
   transform: ${({ $isOpen }) => ($isOpen ? 'rotate(180deg)' : 'rotate(0deg)')};
@@ -46,7 +45,7 @@ const StyledChevron = styled(ChevronDown)<{ $isOpen: boolean }>`
       transition: { duration, timing },
     },
   }) => `transform ${duration.fast} ${timing.ease}`};
-`
+`;
 
 const menuItems = {
   [ProtocolVersion.V3]: {
@@ -73,27 +72,39 @@ const menuItems = {
     link: '/pools/v2',
     external: false,
   },
-}
+};
 
 const titles = {
   [ProtocolVersion.V3]: t`v3`,
   [ProtocolVersion.V2]: t`v2`,
-}
+};
 
-export function PoolVersionMenu({ protocolVersion }: { protocolVersion: ProtocolVersion }) {
-  const isOpen = useModalIsOpen(ApplicationModal.POOL_VERSION)
+export function PoolVersionMenu({
+  protocolVersion,
+}: {
+  protocolVersion: ProtocolVersion;
+}) {
+  const isOpen = useModalIsOpen(ApplicationModal.POOL_VERSION);
 
   return (
     <Menu
       modal={ApplicationModal.POOL_VERSION}
-      menuItems={[menuItems[protocolVersion === ProtocolVersion.V3 ? ProtocolVersion.V2 : ProtocolVersion.V3]]}
+      menuItems={[
+        menuItems[
+          protocolVersion === ProtocolVersion.V3
+            ? ProtocolVersion.V2
+            : ProtocolVersion.V3
+        ],
+      ]}
       flyoutAlignment={FlyoutAlignment.LEFT}
       ToggleUI={(props: any) => (
         <PoolOptionsButton {...props} $isOpen={isOpen}>
-          <ThemedText.BodyPrimary color="neutral2">{titles[protocolVersion]}</ThemedText.BodyPrimary>
+          <ThemedText.BodyPrimary color="neutral2">
+            {titles[protocolVersion]}
+          </ThemedText.BodyPrimary>
           <StyledChevron $isOpen={isOpen} />
         </PoolOptionsButton>
       )}
     />
-  )
+  );
 }

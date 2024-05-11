@@ -1,71 +1,85 @@
-import { InterfacePageName } from '@uniswap/analytics-events'
-import { ChainId, Currency } from '@uniswap/sdk-core'
-import { useWeb3React } from '@web3-react/core'
-import { Trace } from 'analytics'
-import { NetworkAlert } from 'components/NetworkAlert/NetworkAlert'
-import { SwitchLocaleLink } from 'components/SwitchLocaleLink'
-import SwapHeader from 'components/swap/SwapHeader'
-import { SwapTab } from 'components/swap/constants'
-import { PageWrapper, SwapWrapper } from 'components/swap/styled'
-import { asSupportedChain } from 'constants/chains'
-import { useCurrency } from 'hooks/Tokens'
-import useParsedQueryString from 'hooks/useParsedQueryString'
-import { useScreenSize } from 'hooks/useScreenSize'
-import { SendForm } from 'pages/Swap/Send/SendForm'
-import { ReactNode, useMemo } from 'react'
-import { useLocation } from 'react-router-dom'
-import { InterfaceTrade, TradeState } from 'state/routing/types'
-import { isPreviewTrade } from 'state/routing/utils'
-import { SwapAndLimitContextProvider, SwapContextProvider } from 'state/swap/SwapContext'
-import { queryParametersToCurrencyState } from 'state/swap/hooks'
-import { CurrencyState, SwapAndLimitContext } from 'state/swap/types'
-import { useIsDarkMode } from '../../theme/components/ThemeToggle'
-import { LimitFormWrapper } from './Limit/LimitForm'
-import { SwapForm } from './SwapForm'
+import { InterfacePageName } from '@uniswap/analytics-events';
+import { ChainId, Currency } from '@uniswap/sdk-core';
+import { useWeb3React } from '@web3-react/core';
+import { Trace } from 'analytics';
+import { NetworkAlert } from 'components/NetworkAlert/NetworkAlert';
+import { SwitchLocaleLink } from 'components/SwitchLocaleLink';
+import { SwapTab } from 'components/swap/constants';
+import { PageWrapper, SwapWrapper } from 'components/swap/styled';
+import { asSupportedChain } from 'constants/chains';
+import { useCurrency } from 'hooks/Tokens';
+import useParsedQueryString from 'hooks/useParsedQueryString';
+import { ReactNode, useMemo } from 'react';
+import { useLocation } from 'react-router-dom';
+import { InterfaceTrade, TradeState } from 'state/routing/types';
+import { isPreviewTrade } from 'state/routing/utils';
+import {
+  SwapAndLimitContextProvider,
+  SwapContextProvider,
+} from 'state/swap/SwapContext';
+import { queryParametersToCurrencyState } from 'state/swap/hooks';
+import { CurrencyState, SwapAndLimitContext } from 'state/swap/types';
+import { useIsDarkMode } from '../../theme/components/ThemeToggle';
+import { colors } from '../../theme/colors';
+import { SwapForm } from './SwapForm';
 
 export function getIsReviewableQuote(
   trade: InterfaceTrade | undefined,
   tradeState: TradeState,
   swapInputError?: ReactNode
 ): boolean {
-  if (swapInputError) return false
+  if (swapInputError) return false;
   // if the current quote is a preview quote, allow the user to progress to the Swap review screen
-  if (isPreviewTrade(trade)) return true
+  if (isPreviewTrade(trade)) return true;
 
-  return Boolean(trade && tradeState === TradeState.VALID)
+  return Boolean(trade && tradeState === TradeState.VALID);
 }
 
 export default function SwapPage({ className }: { className?: string }) {
-  const location = useLocation()
+  const location = useLocation();
 
-  const { chainId: connectedChainId } = useWeb3React()
-  const supportedChainId = asSupportedChain(connectedChainId)
-  const chainId = supportedChainId || ChainId.MAINNET
+  const { chainId: connectedChainId } = useWeb3React();
+  const supportedChainId = asSupportedChain(connectedChainId);
+  const chainId = supportedChainId || ChainId.MAINNET;
 
-  const parsedQs = useParsedQueryString()
+  const parsedQs = useParsedQueryString();
   const parsedCurrencyState = useMemo(() => {
-    return queryParametersToCurrencyState(parsedQs)
-  }, [parsedQs])
+    return queryParametersToCurrencyState(parsedQs);
+  }, [parsedQs]);
 
-  const initialInputCurrency = useCurrency(parsedCurrencyState.inputCurrencyId, chainId)
-  const initialOutputCurrency = useCurrency(parsedCurrencyState.outputCurrencyId, chainId)
+  const initialInputCurrency = useCurrency(
+    parsedCurrencyState.inputCurrencyId,
+    chainId
+  );
+  const initialOutputCurrency = useCurrency(
+    parsedCurrencyState.outputCurrencyId,
+    chainId
+  );
 
   return (
     <Trace page={InterfacePageName.SWAP_PAGE} shouldLogImpression>
       <PageWrapper>
-        <Swap
-          className={className}
-          chainId={chainId}
-          disableTokenInputs={supportedChainId === undefined}
-          initialInputCurrency={initialInputCurrency}
-          initialOutputCurrency={initialOutputCurrency}
-          syncTabToUrl={true}
-        />
+        <div
+          style={{
+            backgroundColor: colors.surface1_dark,
+            padding: '16px',
+            borderRadius: '8px',
+          }}
+        >
+          <Swap
+            className={className}
+            chainId={chainId}
+            disableTokenInputs={supportedChainId === undefined}
+            initialInputCurrency={initialInputCurrency}
+            initialOutputCurrency={initialOutputCurrency}
+            syncTabToUrl={true}
+          />
+        </div>
         <NetworkAlert />
       </PageWrapper>
       {location.pathname === '/swap' && <SwitchLocaleLink />}
     </Trace>
-  )
+  );
 }
 
 /**
@@ -82,20 +96,19 @@ export function Swap({
   chainId,
   onCurrencyChange,
   disableTokenInputs = false,
-  compact = false,
-  syncTabToUrl,
-}: {
-  className?: string
-  chainId?: ChainId
-  onCurrencyChange?: (selected: CurrencyState) => void
-  disableTokenInputs?: boolean
-  initialInputCurrency?: Currency
-  initialOutputCurrency?: Currency
-  compact?: boolean
-  syncTabToUrl: boolean
+}: // compact = false,
+// syncTabToUrl,
+{
+  className?: string;
+  chainId?: ChainId;
+  onCurrencyChange?: (selected: CurrencyState) => void;
+  disableTokenInputs?: boolean;
+  initialInputCurrency?: Currency;
+  initialOutputCurrency?: Currency;
+  compact?: boolean;
+  syncTabToUrl: boolean;
 }) {
-  const isDark = useIsDarkMode()
-  const screenSize = useScreenSize()
+  const isDark = useIsDarkMode();
 
   return (
     <SwapAndLimitContextProvider
@@ -104,22 +117,48 @@ export function Swap({
       initialOutputCurrency={initialOutputCurrency}
     >
       {/* TODO: Move SwapContextProvider inside Swap tab ONLY after SwapHeader removes references to trade / autoSlippage */}
-      <SwapAndLimitContext.Consumer>
-        {({ currentTab }) => (
-          <SwapContextProvider>
-            <SwapWrapper isDark={isDark} className={className} id="swap-page">
-              <SwapHeader compact={compact || !screenSize.sm} syncTabToUrl={syncTabToUrl} />
-              {currentTab === SwapTab.Swap && (
-                <SwapForm onCurrencyChange={onCurrencyChange} disableTokenInputs={disableTokenInputs} />
-              )}
-              {currentTab === SwapTab.Limit && <LimitFormWrapper onCurrencyChange={onCurrencyChange} />}
+      <div
+        data-testid="swap-container-wrapper"
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          width: '100%',
+          zIndex: 2,
+          fontFamily: 'Courier New',
+        }}
+      >
+        <p
+          style={{
+            textAlign: 'center',
+            fontSize: '1.5rem',
+            fontWeight: 700,
+            fontFamily: 'inherit',
+            marginBottom: '1rem',
+            marginTop: '0rem',
+          }}
+        >
+          Swap
+        </p>
+        <SwapAndLimitContext.Consumer>
+          {({ currentTab }) => (
+            <SwapContextProvider>
+              <SwapWrapper isDark={isDark} className={className} id="swap-page">
+                {/* <SwapHeader compact={compact || !screenSize.sm} syncTabToUrl={syncTabToUrl} /> */}
+                {currentTab === SwapTab.Swap && (
+                  <SwapForm
+                    onCurrencyChange={onCurrencyChange}
+                    disableTokenInputs={disableTokenInputs}
+                  />
+                )}
+                {/* {currentTab === SwapTab.Limit && <LimitFormWrapper onCurrencyChange={onCurrencyChange} />}
               {currentTab === SwapTab.Send && (
                 <SendForm disableTokenInputs={disableTokenInputs} onCurrencyChange={onCurrencyChange} />
-              )}
-            </SwapWrapper>
-          </SwapContextProvider>
-        )}
-      </SwapAndLimitContext.Consumer>
+              )} */}
+              </SwapWrapper>
+            </SwapContextProvider>
+          )}
+        </SwapAndLimitContext.Consumer>
+      </div>
     </SwapAndLimitContextProvider>
-  )
+  );
 }

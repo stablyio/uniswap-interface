@@ -1,11 +1,11 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components';
 
 const H1Styles = css<{ color?: string }>`
   padding: 0;
   margin: 0;
   color: ${(props) => props.color || props.theme.neutral1};
   text-align: center;
-  font-family: Basel;
+  font-family: 'Courier New';
   font-size: 64px;
   font-style: normal;
   font-weight: 500;
@@ -15,18 +15,18 @@ const H1Styles = css<{ color?: string }>`
   @media (max-width: 768px) {
     font-size: 36px;
   }
-`
+`;
 
 export const H1 = styled.span`
   ${H1Styles}
-`
+`;
 // Matches H1 in style but does not use h1 tag for SEO improvement
 
 export const H2 = styled.h2`
   padding: 0;
   margin: 0;
   color: ${(props) => props.color || props.theme.neutral1};
-  font-family: Basel;
+  font-family: 'Courier New';
   font-size: 52px;
   font-style: normal;
   font-weight: 500;
@@ -35,62 +35,68 @@ export const H2 = styled.h2`
   @media (max-width: 1024px) {
     font-size: 36px;
   }
-`
+`;
 export const H3 = styled.h3`
   padding: 0;
   margin: 0;
-  font-family: Basel;
+  font-family: 'Courier New';
   font-size: 24px;
   font-style: normal;
   font-weight: 500;
   letter-spacing: -0.02em;
   line-height: 32px; /* 133.333% */
   color: ${(props) => props.color || props.theme.neutral1};
-`
+`;
 export const Body1 = styled.p`
   padding: 0;
   margin: 0;
   color: ${(props) => props.color || props.theme.neutral1};
   font-feature-settings: 'ss07' on;
   /* Body/1 */
-  font-family: Basel;
+  font-family: 'Courier New';
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
   line-height: 24px; /* 133.333% */
   letter-spacing: -0.01em;
-`
+`;
 
 export type BoxProps = {
-  position?: 'relative' | 'absolute' | 'fixed'
-  top?: string
-  left?: string
-  right?: string
-  bottom?: string
-  direction?: 'row' | 'row-reverse' | 'column' | 'column-reverse'
-  justify?: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around' | 'space-evenly'
-  align?: 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch'
-  wrap?: 'nowrap' | 'wrap' | 'wrap-reverse'
-  flex?: string
-  gap?: string
-  maxWidth?: string
-  width?: string
-  height?: string
-  padding?: string
-  paddingTop?: string
-  paddingRight?: string
-  paddingBottom?: string
-  paddingLeft?: string
-  margin?: string
-  marginTop?: string
-  marginRight?: string
-  marginBottom?: string
-  marginLeft?: string
-  borderRadius?: string
-  pointerEvents?: 'none' | 'auto'
-  overflow?: 'visible' | 'hidden' | 'scroll' | 'auto'
-  transform?: string
-}
+  position?: 'relative' | 'absolute' | 'fixed';
+  top?: string;
+  left?: string;
+  right?: string;
+  bottom?: string;
+  direction?: 'row' | 'row-reverse' | 'column' | 'column-reverse';
+  justify?:
+    | 'flex-start'
+    | 'flex-end'
+    | 'center'
+    | 'space-between'
+    | 'space-around'
+    | 'space-evenly';
+  align?: 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
+  wrap?: 'nowrap' | 'wrap' | 'wrap-reverse';
+  flex?: string;
+  gap?: string;
+  maxWidth?: string;
+  width?: string;
+  height?: string;
+  padding?: string;
+  paddingTop?: string;
+  paddingRight?: string;
+  paddingBottom?: string;
+  paddingLeft?: string;
+  margin?: string;
+  marginTop?: string;
+  marginRight?: string;
+  marginBottom?: string;
+  marginLeft?: string;
+  borderRadius?: string;
+  pointerEvents?: 'none' | 'auto';
+  overflow?: 'visible' | 'hidden' | 'scroll' | 'auto';
+  transform?: string;
+};
 
 // Please do not add any more usages of Box!
 // TODO(WEB-3372): deprecate Box component
@@ -130,4 +136,4 @@ export const Box = styled.div<BoxProps>`
   pointer-events: ${(props) => props.pointerEvents || 'auto'};
   overflow: ${(props) => props.overflow || 'visible'};
   transform: ${(props) => props.transform || 'none'};
-`
+`;

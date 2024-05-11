@@ -1,41 +1,51 @@
-import { t } from 'i18n'
-import { useAtom } from 'jotai'
-import { lazy, ReactNode, Suspense, useMemo } from 'react'
-import { matchPath, Navigate, useLocation } from 'react-router-dom'
-import { shouldDisableNFTRoutesAtom } from 'state/application/atoms'
-import { SpinnerSVG } from 'theme/components'
-import { isBrowserRouterEnabled } from 'utils/env'
+import { t } from 'i18n';
+import { useAtom } from 'jotai';
+import { lazy, ReactNode, Suspense, useMemo } from 'react';
+import { matchPath, Navigate, useLocation } from 'react-router-dom';
+import { shouldDisableNFTRoutesAtom } from 'state/application/atoms';
+import { SpinnerSVG } from 'theme/components';
+import { isBrowserRouterEnabled } from 'utils/env';
 
-import { getDefaultTokensTitle } from './getDefaultTokensTitle'
-import { getExploreTitle } from './getExploreTitle'
+import { getDefaultTokensTitle } from './getDefaultTokensTitle';
+import { getExploreTitle } from './getExploreTitle';
 // High-traffic pages (index and /swap) should not be lazy-loaded.
-import Landing from './Landing'
-import Swap from './Swap'
+import Landing from './Landing';
+import Swap from './Swap';
 
-const NftExplore = lazy(() => import('nft/pages/explore'))
-const Collection = lazy(() => import('nft/pages/collection'))
-const Profile = lazy(() => import('nft/pages/profile'))
-const Asset = lazy(() => import('nft/pages/asset/Asset'))
-const AddLiquidityWithTokenRedirects = lazy(() => import('pages/AddLiquidity/redirects'))
-const AddLiquidityV2WithTokenRedirects = lazy(() => import('pages/AddLiquidityV2/redirects'))
-const RedirectExplore = lazy(() => import('pages/Explore/redirects'))
-const MigrateV2 = lazy(() => import('pages/MigrateV2'))
-const MigrateV2Pair = lazy(() => import('pages/MigrateV2/MigrateV2Pair'))
-const NotFound = lazy(() => import('pages/NotFound'))
-const Pool = lazy(() => import('pages/Pool'))
-const PositionPage = lazy(() => import('pages/Pool/PositionPage'))
-const PoolV2 = lazy(() => import('pages/Pool/v2'))
-const PoolDetails = lazy(() => import('pages/PoolDetails'))
-const PoolFinder = lazy(() => import('pages/PoolFinder'))
-const RemoveLiquidity = lazy(() => import('pages/RemoveLiquidity'))
-const RemoveLiquidityV3 = lazy(() => import('pages/RemoveLiquidity/V3'))
-const TokenDetails = lazy(() => import('pages/TokenDetails'))
-const Vote = lazy(() => import('pages/Vote'))
+const NftExplore = lazy(() => import('nft/pages/explore'));
+const Collection = lazy(() => import('nft/pages/collection'));
+const Profile = lazy(() => import('nft/pages/profile'));
+const Asset = lazy(() => import('nft/pages/asset/Asset'));
+const AddLiquidityWithTokenRedirects = lazy(
+  () => import('pages/AddLiquidity/redirects')
+);
+const AddLiquidityV2WithTokenRedirects = lazy(
+  () => import('pages/AddLiquidityV2/redirects')
+);
+const RedirectExplore = lazy(() => import('pages/Explore/redirects'));
+const MigrateV2 = lazy(() => import('pages/MigrateV2'));
+const MigrateV2Pair = lazy(() => import('pages/MigrateV2/MigrateV2Pair'));
+const NotFound = lazy(() => import('pages/NotFound'));
+const Pool = lazy(() => import('pages/Pool'));
+const PositionPage = lazy(() => import('pages/Pool/PositionPage'));
+const PoolV2 = lazy(() => import('pages/Pool/v2'));
+const PoolDetails = lazy(() => import('pages/PoolDetails'));
+const PoolFinder = lazy(() => import('pages/PoolFinder'));
+const RemoveLiquidity = lazy(() => import('pages/RemoveLiquidity'));
+const RemoveLiquidityV3 = lazy(() => import('pages/RemoveLiquidity/V3'));
+const TokenDetails = lazy(() => import('pages/TokenDetails'));
+const Vote = lazy(() => import('pages/Vote'));
 
 // this is the same svg defined in assets/images/blue-loader.svg
 // it is defined here because the remote asset may not have had time to load when this file is executing
 const LazyLoadSpinner = () => (
-  <SpinnerSVG width="94" height="94" viewBox="0 0 94 94" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <SpinnerSVG
+    width="94"
+    height="94"
+    viewBox="0 0 94 94"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <path
       d="M92 47C92 22.1472 71.8528 2 47 2C22.1472 2 2 22.1472 2 47C2 71.8528 22.1472 92 47 92"
       stroke="#2172E5"
@@ -44,21 +54,21 @@ const LazyLoadSpinner = () => (
       strokeLinejoin="round"
     />
   </SpinnerSVG>
-)
+);
 
 interface RouterConfig {
-  browserRouterEnabled?: boolean
-  hash?: string
-  shouldDisableNFTRoutes?: boolean
+  browserRouterEnabled?: boolean;
+  hash?: string;
+  shouldDisableNFTRoutes?: boolean;
 }
 
 /**
  * Convenience hook which organizes the router configuration into a single object.
  */
 export function useRouterConfig(): RouterConfig {
-  const browserRouterEnabled = isBrowserRouterEnabled()
-  const { hash } = useLocation()
-  const [shouldDisableNFTRoutes] = useAtom(shouldDisableNFTRoutesAtom)
+  const browserRouterEnabled = isBrowserRouterEnabled();
+  const { hash } = useLocation();
+  const [shouldDisableNFTRoutes] = useAtom(shouldDisableNFTRoutesAtom);
   return useMemo(
     () => ({
       browserRouterEnabled,
@@ -66,38 +76,45 @@ export function useRouterConfig(): RouterConfig {
       shouldDisableNFTRoutes: Boolean(shouldDisableNFTRoutes),
     }),
     [browserRouterEnabled, hash, shouldDisableNFTRoutes]
-  )
+  );
 }
 
 export interface RouteDefinition {
-  path: string
-  nestedPaths: string[]
-  getTitle: (path?: string) => string
-  enabled: (args: RouterConfig) => boolean
-  getElement: (args: RouterConfig) => ReactNode
+  path: string;
+  nestedPaths: string[];
+  getTitle: (path?: string) => string;
+  enabled: (args: RouterConfig) => boolean;
+  getElement: (args: RouterConfig) => ReactNode;
 }
 
 // Assigns the defaults to the route definition.
-function createRouteDefinition(route: Partial<RouteDefinition>): RouteDefinition {
+function createRouteDefinition(
+  route: Partial<RouteDefinition>
+): RouteDefinition {
   return {
     getElement: () => null,
-    getTitle: () => 'Uniswap Interface',
+    getTitle: () => 'Trinity',
     enabled: () => true,
     path: '/',
     nestedPaths: [],
     // overwrite the defaults
     ...route,
-  }
+  };
 }
 
-const SwapTitle = t`Buy, sell & trade Ethereum and other top tokens on Uniswap`
+const SwapTitle = t`Buy, sell & trade Ethereum and other top tokens on Uniswap`;
 
 export const routes: RouteDefinition[] = [
   createRouteDefinition({
     path: '/',
-    getTitle: () => t`Uniswap | Trade crypto & NFTs safely on the top DeFi exchange`,
+    getTitle: () =>
+      t`Uniswap | Trade crypto & NFTs safely on the top DeFi exchange`,
     getElement: (args) => {
-      return args.browserRouterEnabled && args.hash ? <Navigate to={args.hash.replace('#', '')} replace /> : <Landing />
+      return args.browserRouterEnabled && args.hash ? (
+        <Navigate to={args.hash.replace('#', '')} replace />
+      ) : (
+        <Landing />
+      );
     },
   }),
   createRouteDefinition({
@@ -253,7 +270,8 @@ export const routes: RouteDefinition[] = [
       </Suspense>
     ),
     enabled: (args) => !args.shouldDisableNFTRoutes,
-    getTitle: () => t`Trade NFTs across OpenSea & other top marketplaces on Uniswap`,
+    getTitle: () =>
+      t`Trade NFTs across OpenSea & other top marketplaces on Uniswap`,
   }),
   createRouteDefinition({
     path: '/nfts/asset/:contractAddress/:tokenId',
@@ -295,23 +313,28 @@ export const routes: RouteDefinition[] = [
     enabled: (args) => !args.shouldDisableNFTRoutes,
     getTitle: () => t`Explore NFTs on Uniswap`,
   }),
-  createRouteDefinition({ path: '*', getElement: () => <Navigate to="/not-found" replace /> }),
+  createRouteDefinition({
+    path: '*',
+    getElement: () => <Navigate to="/not-found" replace />,
+  }),
   createRouteDefinition({ path: '/not-found', getElement: () => <NotFound /> }),
-]
+];
 
 export const findRouteByPath = (pathname: string) => {
   for (const route of routes) {
-    const match = matchPath(route.path, pathname)
+    const match = matchPath(route.path, pathname);
     if (match) {
-      return route
+      return route;
     }
-    const subPaths = route.nestedPaths.map((nestedPath) => `${route.path}/${nestedPath}`)
+    const subPaths = route.nestedPaths.map(
+      (nestedPath) => `${route.path}/${nestedPath}`
+    );
     for (const subPath of subPaths) {
-      const match = matchPath(subPath, pathname)
+      const match = matchPath(subPath, pathname);
       if (match) {
-        return route
+        return route;
       }
     }
   }
-  return undefined
-}
+  return undefined;
+};

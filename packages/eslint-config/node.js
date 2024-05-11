@@ -20,7 +20,7 @@ module.exports = {
         printWidth: 120,
       },
     ],
-    'import/no-unused-modules': ['error', { unusedExports: true }],
+    'import/no-unused-modules': ['off', { unusedExports: true }],
     'object-shorthand': ['error', 'always'],
     'unused-imports/no-unused-imports': 'error',
   },
@@ -47,6 +47,8 @@ module.exports = {
         '@typescript-eslint/explicit-module-boundary-types': 'off',
         '@typescript-eslint/explicit-function-return-type': 'off',
         '@typescript-eslint/no-restricted-imports': ['error', nodeRestrictedImports],
+        semi: ['error', 'never'],
+        quotes: [2, 'single'],
       },
     },
     {
