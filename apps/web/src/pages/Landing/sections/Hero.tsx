@@ -1,15 +1,15 @@
-import { useCurrency } from 'hooks/Tokens';
-import { Swap } from 'pages/Swap';
-import { useEffect, useState } from 'react';
-import styled, { css, keyframes } from 'styled-components';
+import { useCurrency } from 'hooks/Tokens'
+import { Swap } from 'pages/Swap'
+import { useEffect, useState } from 'react'
+import styled, { css, keyframes } from 'styled-components'
 
-import { Box } from '../components/Generics';
-import { RiseIn } from '../components/animations';
+import { Box } from '../components/Generics'
+import { RiseIn } from '../components/animations'
 
 const Container = styled(Box)`
   min-width: 100%;
   padding-top: 72px;
-`;
+`
 const LandingSwapContainer = styled(Box)`
   width: 480px;
   padding: 8px;
@@ -18,7 +18,7 @@ const LandingSwapContainer = styled(Box)`
   @media (max-width: 768px) {
     width: 100%;
   }
-`;
+`
 const LandingSwap = styled(Swap)`
   position: relative;
   width: 100%;
@@ -29,7 +29,7 @@ const LandingSwap = styled(Swap)`
   & > div:first-child > div:first-child {
     display: none;
   }
-`;
+`
 // const StyledH1 = styled(H1)`
 //   @media (max-width: 768px) {
 //     font-size: 52px;
@@ -50,7 +50,7 @@ const shrinkAndFade = keyframes`
     transform: scale(0.8);
     opacity: 0;
   }
-`;
+`
 const Center = styled(Box)<{ transition?: boolean }>`
   width: unset;
   pointer-events: none;
@@ -70,7 +70,7 @@ const Center = styled(Box)<{ transition?: boolean }>`
     css`
       animation: ${shrinkAndFade} 1s ease-in-out forwards;
     `};
-`;
+`
 // const LearnMoreContainer = styled(Box)`
 //   bottom: 48px;
 //   @media (max-width: ${BREAKPOINTS.md}px) {
@@ -83,28 +83,28 @@ const Center = styled(Box)<{ transition?: boolean }>`
 // `
 
 interface HeroProps {
-  scrollToRef: () => void;
-  transition?: boolean;
+  scrollToRef: () => void
+  transition?: boolean
 }
 
 export function Hero({ transition }: HeroProps) {
-  const [scrollPosition, setScrollPosition] = useState(0);
+  const [scrollPosition, setScrollPosition] = useState(0)
   const handleScroll = () => {
-    const position = window.scrollY;
-    setScrollPosition(position);
-  };
-  const initialInputCurrency = useCurrency('ETH');
+    const position = window.scrollY
+    setScrollPosition(position)
+  }
+  const initialInputCurrency = useCurrency('ETH')
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('scroll', handleScroll, { passive: true })
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
 
-  const translateY = -scrollPosition / 7;
-  const opacityY = 1 - scrollPosition / 1000;
+  const translateY = -scrollPosition / 7
+  const opacityY = 1 - scrollPosition / 1000
 
   return (
     <Container
@@ -128,13 +128,10 @@ export function Hero({ transition }: HeroProps) {
       >
         <RiseIn delay={0.4}>
           <LandingSwapContainer>
-            <LandingSwap
-              syncTabToUrl={false}
-              initialInputCurrency={initialInputCurrency}
-            />
+            <LandingSwap syncTabToUrl={false} initialInputCurrency={initialInputCurrency} />
           </LandingSwapContainer>
         </RiseIn>
       </Center>
     </Container>
-  );
+  )
 }

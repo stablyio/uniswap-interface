@@ -38,4 +38,4 @@ export const paths = [
   '/nfts/collection/:contractAddress',
   '/nfts/collection/:contractAddress/activity',
   '/aave/markets/',
-];
+]

@@ -127,9 +127,9 @@ export const colors = {
   critical2_dark: '#2E0805',
   critical2_light: '#FFF2F1',
   scrim: 'rgba(0, 0, 0, 0.60)',
-};
+}
 
-export type ThemeColors = typeof darkTheme;
+export type ThemeColors = typeof darkTheme
 
 const commonTheme = {
   white: colors.white,
@@ -160,7 +160,7 @@ const commonTheme = {
 
   brandedGradient: 'linear-gradient(139.57deg, #FF79C9 4.35%, #FFB8E2 96.44%);',
   promotionalGradient: colors.accent1_light,
-};
+}
 
 export const darkTheme = {
   ...commonTheme,
@@ -191,7 +191,7 @@ export const darkTheme = {
   scrim: colors.scrim,
 
   warning2: colors.gold200,
-};
+}
 
 export const lightTheme: ThemeColors = {
   ...commonTheme,
@@ -222,4 +222,4 @@ export const lightTheme: ThemeColors = {
   scrim: colors.scrim,
 
   warning2: colors.gold200,
-};
+}

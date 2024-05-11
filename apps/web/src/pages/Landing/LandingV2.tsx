@@ -1,11 +1,11 @@
-import { Suspense, lazy, memo, useRef } from 'react';
-import styled from 'styled-components';
+import { Suspense, lazy, memo, useRef } from 'react'
+import styled from 'styled-components'
 
-import { Hero } from './sections/Hero';
+import { Hero } from './sections/Hero'
 
 // The Fold is always loaded, but is lazy-loaded because it is not seen without user interaction.
 // Annotating it with webpackPreload allows it to be ready when requested.
-const Fold = lazy(() => import(/* webpackPreload: true */ './Fold'));
+const Fold = lazy(() => import(/* webpackPreload: true */ './Fold'))
 
 const Container = styled.div`
   position: relative;
@@ -20,7 +20,7 @@ const Container = styled.div`
   min-width: 100%;
   max-width: 1280px;
   z-index: 1;
-`;
+`
 
 const Grain = styled.div`
   display: flex;
@@ -32,18 +32,18 @@ const Grain = styled.div`
   background: url(/uniswap-static/images/noise-color.png);
   opacity: 0.018;
   z-index: 0;
-`;
+`
 
 function LandingV2({ transition }: { transition?: boolean }) {
-  const scrollAnchor = useRef<HTMLDivElement | null>(null);
+  const scrollAnchor = useRef<HTMLDivElement | null>(null)
   const scrollToRef = () => {
     if (scrollAnchor.current) {
       window.scrollTo({
         top: scrollAnchor.current.offsetTop - 120,
         behavior: 'smooth',
-      });
+      })
     }
-  };
+  }
 
   return (
     <>
@@ -55,7 +55,7 @@ function LandingV2({ transition }: { transition?: boolean }) {
         </Suspense>
       </Container>
     </>
-  );
+  )
 }
 
-export default memo(LandingV2);
+export default memo(LandingV2)

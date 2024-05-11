@@ -1,35 +1,35 @@
-import { InterfacePageName } from '@uniswap/analytics-events';
-import { Currency, CurrencyAmount, Token } from '@uniswap/sdk-core';
-import { useWeb3React } from '@web3-react/core';
-import { Trace } from 'analytics';
-import { V2Unsupported } from 'components/V2Unsupported';
-import { useNetworkSupportsV2 } from 'hooks/useNetworkSupportsV2';
-import { Trans } from 'i18n';
-import JSBI from 'jsbi';
-import { useCallback, useEffect, useState } from 'react';
-import { Plus } from 'react-feather';
-import { useLocation } from 'react-router-dom';
-import { Text } from 'rebass';
-import { StyledInternalLink, ThemedText } from 'theme/components';
+import { InterfacePageName } from '@uniswap/analytics-events'
+import { Currency, CurrencyAmount, Token } from '@uniswap/sdk-core'
+import { useWeb3React } from '@web3-react/core'
+import { Trace } from 'analytics'
+import { V2Unsupported } from 'components/V2Unsupported'
+import { useNetworkSupportsV2 } from 'hooks/useNetworkSupportsV2'
+import { Trans } from 'i18n'
+import JSBI from 'jsbi'
+import { useCallback, useEffect, useState } from 'react'
+import { Plus } from 'react-feather'
+import { useLocation } from 'react-router-dom'
+import { Text } from 'rebass'
+import { StyledInternalLink, ThemedText } from 'theme/components'
 
-import { CurrencySearchFilters } from 'components/SearchModal/CurrencySearch';
-import { useTheme } from 'styled-components';
-import { ButtonDropdownLight } from '../../components/Button';
-import { BlueCard, LightCard } from '../../components/Card';
-import { AutoColumn, ColumnCenter } from '../../components/Column';
-import CurrencyLogo from '../../components/Logo/CurrencyLogo';
-import { FindPoolTabs } from '../../components/NavigationTabs';
-import { MinimalPositionCard } from '../../components/PositionCard';
-import Row from '../../components/Row';
-import CurrencySearchModal from '../../components/SearchModal/CurrencySearchModal';
-import { SwitchLocaleLink } from '../../components/SwitchLocaleLink';
-import { nativeOnChain } from '../../constants/tokens';
-import { PairState, useV2Pair } from '../../hooks/useV2Pairs';
-import { useTokenBalance } from '../../state/connection/hooks';
-import { usePairAdder } from '../../state/user/hooks';
-import { currencyId } from '../../utils/currencyId';
-import AppBody from '../AppBody';
-import { Dots } from '../Pool/styled';
+import { CurrencySearchFilters } from 'components/SearchModal/CurrencySearch'
+import { useTheme } from 'styled-components'
+import { ButtonDropdownLight } from '../../components/Button'
+import { BlueCard, LightCard } from '../../components/Card'
+import { AutoColumn, ColumnCenter } from '../../components/Column'
+import CurrencyLogo from '../../components/Logo/CurrencyLogo'
+import { FindPoolTabs } from '../../components/NavigationTabs'
+import { MinimalPositionCard } from '../../components/PositionCard'
+import Row from '../../components/Row'
+import CurrencySearchModal from '../../components/SearchModal/CurrencySearchModal'
+import { SwitchLocaleLink } from '../../components/SwitchLocaleLink'
+import { nativeOnChain } from '../../constants/tokens'
+import { PairState, useV2Pair } from '../../hooks/useV2Pairs'
+import { useTokenBalance } from '../../state/connection/hooks'
+import { usePairAdder } from '../../state/user/hooks'
+import { currencyId } from '../../utils/currencyId'
+import AppBody from '../AppBody'
+import { Dots } from '../Pool/styled'
 
 enum Fields {
   TOKEN0 = 0,
@@ -37,37 +37,32 @@ enum Fields {
 }
 
 function useQuery() {
-  return new URLSearchParams(useLocation().search);
+  return new URLSearchParams(useLocation().search)
 }
 
 const POOLFINDER_CURRENCY_SEARCH_FILTERS: CurrencySearchFilters = {
   showCommonBases: true,
-};
+}
 
 export default function PoolFinder() {
-  const query = useQuery();
-  const theme = useTheme();
+  const query = useQuery()
+  const theme = useTheme()
 
-  const { account, chainId } = useWeb3React();
+  const { account, chainId } = useWeb3React()
 
-  const [showSearch, setShowSearch] = useState<boolean>(false);
-  const [activeField, setActiveField] = useState<number>(Fields.TOKEN1);
+  const [showSearch, setShowSearch] = useState<boolean>(false)
+  const [activeField, setActiveField] = useState<number>(Fields.TOKEN1)
 
-  const [currency0, setCurrency0] = useState<Currency | null>(() =>
-    chainId ? nativeOnChain(chainId) : null
-  );
-  const [currency1, setCurrency1] = useState<Currency | null>(null);
+  const [currency0, setCurrency0] = useState<Currency | null>(() => (chainId ? nativeOnChain(chainId) : null))
+  const [currency1, setCurrency1] = useState<Currency | null>(null)
 
-  const [pairState, pair] = useV2Pair(
-    currency0 ?? undefined,
-    currency1 ?? undefined
-  );
-  const addPair = usePairAdder();
+  const [pairState, pair] = useV2Pair(currency0 ?? undefined, currency1 ?? undefined)
+  const addPair = usePairAdder()
   useEffect(() => {
     if (pair) {
-      addPair(pair);
+      addPair(pair)
     }
-  }, [pair, addPair]);
+  }, [pair, addPair])
 
   const validPairNoLiquidity: boolean =
     pairState === PairState.NOT_EXISTS ||
@@ -76,30 +71,25 @@ export default function PoolFinder() {
         pair &&
         JSBI.equal(pair.reserve0.quotient, JSBI.BigInt(0)) &&
         JSBI.equal(pair.reserve1.quotient, JSBI.BigInt(0))
-    );
+    )
 
-  const position: CurrencyAmount<Token> | undefined = useTokenBalance(
-    account ?? undefined,
-    pair?.liquidityToken
-  );
-  const hasPosition = Boolean(
-    position && JSBI.greaterThan(position.quotient, JSBI.BigInt(0))
-  );
+  const position: CurrencyAmount<Token> | undefined = useTokenBalance(account ?? undefined, pair?.liquidityToken)
+  const hasPosition = Boolean(position && JSBI.greaterThan(position.quotient, JSBI.BigInt(0)))
 
   const handleCurrencySelect = useCallback(
     (currency: Currency) => {
       if (activeField === Fields.TOKEN0) {
-        setCurrency0(currency);
+        setCurrency0(currency)
       } else {
-        setCurrency1(currency);
+        setCurrency1(currency)
       }
     },
     [activeField]
-  );
+  )
 
   const handleSearchDismiss = useCallback(() => {
-    setShowSearch(false);
-  }, [setShowSearch]);
+    setShowSearch(false)
+  }, [setShowSearch])
 
   const prerequisiteMessage = (
     <LightCard padding="45px 10px">
@@ -111,10 +101,10 @@ export default function PoolFinder() {
         )}
       </Text>
     </LightCard>
-  );
+  )
 
-  const networkSupportsV2 = useNetworkSupportsV2();
-  if (!networkSupportsV2) return <V2Unsupported />;
+  const networkSupportsV2 = useNetworkSupportsV2()
+  if (!networkSupportsV2) return <V2Unsupported />
 
   return (
     <Trace page={InterfacePageName.POOL_PAGE} shouldLogImpression>
@@ -126,37 +116,26 @@ export default function PoolFinder() {
               <AutoColumn gap="10px">
                 <ThemedText.DeprecatedLink fontWeight={485} color="accent1">
                   <Trans>
-                    <b>Tip:</b> Use this tool to find v2 pools that don&apos;t
-                    automatically appear in the interface.
+                    <b>Tip:</b> Use this tool to find v2 pools that don&apos;t automatically appear in the interface.
                   </Trans>
                 </ThemedText.DeprecatedLink>
               </AutoColumn>
             </BlueCard>
             <ButtonDropdownLight
               onClick={() => {
-                setShowSearch(true);
-                setActiveField(Fields.TOKEN0);
+                setShowSearch(true)
+                setActiveField(Fields.TOKEN0)
               }}
             >
               {currency0 ? (
                 <Row>
                   <CurrencyLogo currency={currency0} />
-                  <Text
-                    fontWeight={535}
-                    fontSize={20}
-                    marginLeft="12px"
-                    fontFamily={theme.fonts.code}
-                  >
+                  <Text fontWeight={535} fontSize={20} marginLeft="12px" fontFamily={theme.fonts.code}>
                     {currency0.symbol}
                   </Text>
                 </Row>
               ) : (
-                <Text
-                  fontWeight={535}
-                  fontSize={20}
-                  marginLeft="12px"
-                  fontFamily={theme.fonts.code}
-                >
+                <Text fontWeight={535} fontSize={20} marginLeft="12px" fontFamily={theme.fonts.code}>
                   <Trans>Select a token</Trans>
                 </Text>
               )}
@@ -168,29 +147,19 @@ export default function PoolFinder() {
 
             <ButtonDropdownLight
               onClick={() => {
-                setShowSearch(true);
-                setActiveField(Fields.TOKEN1);
+                setShowSearch(true)
+                setActiveField(Fields.TOKEN1)
               }}
             >
               {currency1 ? (
                 <Row>
                   <CurrencyLogo currency={currency1} />
-                  <Text
-                    fontWeight={535}
-                    fontSize={20}
-                    marginLeft="12px"
-                    fontFamily={theme.fonts.code}
-                  >
+                  <Text fontWeight={535} fontSize={20} marginLeft="12px" fontFamily={theme.fonts.code}>
                     {currency1.symbol}
                   </Text>
                 </Row>
               ) : (
-                <Text
-                  fontWeight={535}
-                  fontSize={20}
-                  marginLeft="12px"
-                  fontFamily={theme.fonts.code}
-                >
+                <Text fontWeight={535} fontSize={20} marginLeft="12px" fontFamily={theme.fonts.code}>
                   <Trans>Select a token</Trans>
                 </Text>
               )}
@@ -205,11 +174,7 @@ export default function PoolFinder() {
                   borderRadius: '12px',
                 }}
               >
-                <Text
-                  textAlign="center"
-                  fontWeight={535}
-                  fontFamily={theme.fonts.code}
-                >
+                <Text textAlign="center" fontWeight={535} fontFamily={theme.fonts.code}>
                   <Trans>Pool found!</Trans>
                 </Text>
                 <StyledInternalLink to="pools/v2">
@@ -228,15 +193,9 @@ export default function PoolFinder() {
                   <LightCard padding="45px 10px">
                     <AutoColumn gap="sm" justify="center">
                       <Text textAlign="center" fontFamily={theme.fonts.code}>
-                        <Trans>
-                          You don’t have liquidity in this pool yet.
-                        </Trans>
+                        <Trans>You don’t have liquidity in this pool yet.</Trans>
                       </Text>
-                      <StyledInternalLink
-                        to={`/add/v2/${currencyId(currency0)}/${currencyId(
-                          currency1
-                        )}`}
-                      >
+                      <StyledInternalLink to={`/add/v2/${currencyId(currency0)}/${currencyId(currency1)}`}>
                         <Text textAlign="center" fontFamily={theme.fonts.code}>
                           <Trans>Add liquidity.</Trans>
                         </Text>
@@ -250,11 +209,7 @@ export default function PoolFinder() {
                     <Text textAlign="center" fontFamily={theme.fonts.code}>
                       <Trans>No pool found.</Trans>
                     </Text>
-                    <StyledInternalLink
-                      to={`/add/${currencyId(currency0)}/${currencyId(
-                        currency1
-                      )}`}
-                    >
+                    <StyledInternalLink to={`/add/${currencyId(currency0)}/${currencyId(currency1)}`}>
                       <Trans>Create pool.</Trans>
                     </StyledInternalLink>
                   </AutoColumn>
@@ -286,15 +241,12 @@ export default function PoolFinder() {
             isOpen={showSearch}
             onCurrencySelect={handleCurrencySelect}
             onDismiss={handleSearchDismiss}
-            selectedCurrency={
-              (activeField === Fields.TOKEN0 ? currency1 : currency0) ??
-              undefined
-            }
+            selectedCurrency={(activeField === Fields.TOKEN0 ? currency1 : currency0) ?? undefined}
             currencySearchFilters={POOLFINDER_CURRENCY_SEARCH_FILTERS}
           />
         </AppBody>
         <SwitchLocaleLink />
       </>
     </Trace>
-  );
+  )
 }

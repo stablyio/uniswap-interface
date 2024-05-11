@@ -1,24 +1,24 @@
-import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
-import styled, { css } from 'styled-components';
+import { motion } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
+import styled, { css } from 'styled-components'
 
-import { Box, BoxProps } from '../Generics';
+import { Box, BoxProps } from '../Generics'
 
 type ValuePropCardProps = {
-  isDarkMode?: boolean;
-  backgroundColor?: { light: string; dark: string };
-  textColor?: string;
-  height?: string;
-  minHeight?: string;
-  tagText?: string;
-  titleText?: string;
-  titleWidth?: string;
-  alignTextToBottom?: boolean;
-  children?: React.ReactNode;
-  button?: React.ReactNode;
-  href?: string;
-  to?: string;
-};
+  isDarkMode?: boolean
+  backgroundColor?: { light: string; dark: string }
+  textColor?: string
+  height?: string
+  minHeight?: string
+  tagText?: string
+  titleText?: string
+  titleWidth?: string
+  alignTextToBottom?: boolean
+  children?: React.ReactNode
+  button?: React.ReactNode
+  href?: string
+  to?: string
+}
 
 const Container = motion(styled(Box)<ValuePropCardProps & BoxProps>`
   position: relative;
@@ -26,10 +26,7 @@ const Container = motion(styled(Box)<ValuePropCardProps & BoxProps>`
   width: 100%;
   cursor: pointer;
   height: ${(props) => props.height || '609px'};
-  background-color: ${(props) =>
-    props.isDarkMode
-      ? props.backgroundColor?.dark
-      : props.backgroundColor?.light};
+  background-color: ${(props) => (props.isDarkMode ? props.backgroundColor?.dark : props.backgroundColor?.light)};
   overflow: hidden;
   text-decoration: none;
   @media (max-width: 1024px) {
@@ -40,7 +37,7 @@ const Container = motion(styled(Box)<ValuePropCardProps & BoxProps>`
     height: auto;
     min-height: ${(props) => props.minHeight || '240px'};
   }
-`);
+`)
 
 const Inner = styled.div<{ alignTextToBottom?: boolean }>`
   width: 100%;
@@ -65,7 +62,7 @@ const Inner = styled.div<{ alignTextToBottom?: boolean }>`
   @media (max-width: 396px) {
     padding: 20px;
   }
-`;
+`
 const Title = styled.div`
   color: ${(props) => props.color};
   font-feature-settings: 'ss07' on;
@@ -84,24 +81,15 @@ const Title = styled.div`
     font-size: 24px;
     line-height: 32px;
   }
-`;
+`
 export default function ValuePropCard(props: ValuePropCardProps & BoxProps) {
-  const {
-    isDarkMode,
-    backgroundColor,
-    height,
-    textColor,
-    minHeight,
-    alignTextToBottom,
-    href,
-    to,
-  } = props;
-  const navigate = useNavigate();
+  const { isDarkMode, backgroundColor, height, textColor, minHeight, alignTextToBottom, href, to } = props
+  const navigate = useNavigate()
   const handleClick = () => {
     if (to) {
-      navigate(to);
+      navigate(to)
     }
-  };
+  }
   return (
     <Container
       initial="initial"
@@ -123,5 +111,5 @@ export default function ValuePropCard(props: ValuePropCardProps & BoxProps) {
       </Inner>
       {props.children}
     </Container>
-  );
+  )
 }
