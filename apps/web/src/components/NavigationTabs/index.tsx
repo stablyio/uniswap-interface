@@ -1,26 +1,26 @@
-import { Percent } from '@uniswap/sdk-core'
-import { useWeb3React } from '@web3-react/core'
-import SettingsTab from 'components/Settings'
-import { Trans } from 'i18n'
-import { ReactNode } from 'react'
-import { ArrowLeft } from 'react-feather'
-import { Link, useNavigate } from 'react-router-dom'
-import { Box } from 'rebass'
-import { useAppDispatch } from 'state/hooks'
-import { resetMintState } from 'state/mint/actions'
-import { resetMintState as resetMintV3State } from 'state/mint/v3/actions'
-import styled, { useTheme } from 'styled-components'
-import { ThemedText } from 'theme/components'
-import { flexRowNoWrap } from 'theme/styles'
+import { Percent } from '@uniswap/sdk-core';
+import { useWeb3React } from '@web3-react/core';
+import SettingsTab from 'components/Settings';
+import { Trans } from 'i18n';
+import { ReactNode } from 'react';
+import { ArrowLeft } from 'react-feather';
+import { Link, useNavigate } from 'react-router-dom';
+import { Box } from 'rebass';
+import { useAppDispatch } from 'state/hooks';
+import { resetMintState } from 'state/mint/actions';
+import { resetMintState as resetMintV3State } from 'state/mint/v3/actions';
+import styled, { useTheme } from 'styled-components';
+import { ThemedText } from 'theme/components';
+import { flexRowNoWrap } from 'theme/styles';
 
-import { RowBetween } from '../Row'
+import { RowBetween } from '../Row';
 
 const Tabs = styled.div`
   ${flexRowNoWrap};
   align-items: center;
   border-radius: 3rem;
   justify-content: space-evenly;
-`
+`;
 
 const StyledLink = styled(Link)<{ flex?: string }>`
   flex: ${({ flex }) => flex ?? 'none'};
@@ -31,17 +31,17 @@ const StyledLink = styled(Link)<{ flex?: string }>`
     flex: none;
     margin-right: 10px;
   `};
-`
+`;
 
 const FindPoolTabsText = styled(ThemedText.H1Small)`
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-`
+`;
 
 const StyledArrowLeft = styled(ArrowLeft)`
   color: ${({ theme }) => theme.neutral1};
-`
+`;
 
 export function FindPoolTabs({ origin }: { origin: string }) {
   return (
@@ -55,14 +55,15 @@ export function FindPoolTabs({ origin }: { origin: string }) {
         </FindPoolTabsText>
       </RowBetween>
     </Tabs>
-  )
+  );
 }
 
 const AddRemoveTitleText = styled(ThemedText.H1Small)<{ $center: boolean }>`
+  font-family: ${({ theme }) => theme.fonts.code};
   flex: 1;
   margin: auto;
   text-align: ${({ $center }) => ($center ? 'center' : 'start')};
-`
+`;
 
 export function AddRemoveTabs({
   adding,
@@ -70,17 +71,17 @@ export function AddRemoveTabs({
   autoSlippage,
   children,
 }: {
-  adding: boolean
-  creating: boolean
-  autoSlippage: Percent
-  showBackLink?: boolean
-  children?: ReactNode
+  adding: boolean;
+  creating: boolean;
+  autoSlippage: Percent;
+  showBackLink?: boolean;
+  children?: ReactNode;
 }) {
-  const { chainId } = useWeb3React()
-  const theme = useTheme()
+  const { chainId } = useWeb3React();
+  const theme = useTheme();
   // reset states on back
-  const dispatch = useAppDispatch()
-  const navigate = useNavigate()
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   return (
     <Tabs>
@@ -88,13 +89,13 @@ export function AddRemoveTabs({
         <StyledLink
           to=".."
           onClick={(e) => {
-            e.preventDefault()
-            navigate(-1)
+            e.preventDefault();
+            navigate(-1);
 
             if (adding) {
               // not 100% sure both of these are needed
-              dispatch(resetMintState())
-              dispatch(resetMintV3State())
+              dispatch(resetMintState());
+              dispatch(resetMintV3State());
             }
           }}
           flex={children ? '1' : undefined}
@@ -111,8 +112,12 @@ export function AddRemoveTabs({
           )}
         </AddRemoveTitleText>
         {children && <Box style={{ marginRight: '.5rem' }}>{children}</Box>}
-        <SettingsTab autoSlippage={autoSlippage} chainId={chainId} hideRoutingSettings />
+        <SettingsTab
+          autoSlippage={autoSlippage}
+          chainId={chainId}
+          hideRoutingSettings
+        />
       </RowBetween>
     </Tabs>
-  )
+  );
 }

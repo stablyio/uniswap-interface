@@ -1,5 +1,8 @@
-import { createGlobalTheme, createGlobalThemeContract } from '@vanilla-extract/css'
-import { createSprinkles, defineProperties } from '@vanilla-extract/sprinkles'
+import {
+  createGlobalTheme,
+  createGlobalThemeContract,
+} from '@vanilla-extract/css';
+import { createSprinkles, defineProperties } from '@vanilla-extract/sprinkles';
 
 const themeContractValues = {
   colors: {
@@ -41,16 +44,19 @@ const themeContractValues = {
     hover: '0.6',
     pressed: '0.4',
   },
-}
+};
 
-export type Theme = typeof themeContractValues
+export type Theme = typeof themeContractValues;
 
-export const themeVars = createGlobalThemeContract(themeContractValues, (_, path) => `genie-${path.join('-')}`)
+export const themeVars = createGlobalThemeContract(
+  themeContractValues,
+  (_, path) => `genie-${path.join('-')}`
+);
 
 export const navDimensions = {
-  height: 72,
-  verticalPad: 20,
-}
+  height: 48, // 72,
+  verticalPad: 8, // 20,
+};
 
 const dimensions = {
   '0': '0',
@@ -95,7 +101,7 @@ const dimensions = {
   viewWidth: '100vw',
   auto: 'auto',
   inherit: 'inherit',
-}
+};
 
 const spacing = {
   '0': '0',
@@ -131,7 +137,7 @@ const spacing = {
   '1/2': '50%',
   auto: 'auto',
   unset: 'unset',
-}
+};
 
 const zIndices = {
   auto: 'auto',
@@ -147,7 +153,7 @@ const zIndices = {
   popover: '1070',
   tooltip: '1080',
   modalOverTooltip: '1090',
-}
+};
 
 export const vars = createGlobalTheme(':root', {
   color: {
@@ -205,9 +211,9 @@ export const vars = createGlobalTheme(':root', {
     accentActive: '#FC72FF',
     //NEW COLORS FOR SPORE - need to define light/dark here cause they are root colors now (different system)
     neutral1_dark: '#FFFFFF',
-    neutral2_dark: '#9B9B9B',
+    neutral2_dark: '#757575',
     neutral3_dark: '#5E5E5E',
-    surface1_dark: '#131313',
+    surface1_dark: '#424242',
     surface2_dark: '#1B1B1B',
     surface3_dark: '#FFFFFF1f',
     surface4_dark: '#FFFFFF33',
@@ -278,6 +284,7 @@ export const vars = createGlobalTheme(':root', {
   fontWeight: {
     book: '485',
     medium: '535',
+    bold: '700',
   },
   time: {
     '125': '125ms',
@@ -285,10 +292,14 @@ export const vars = createGlobalTheme(':root', {
     '500': '500ms',
   },
   fonts: {
-    body: 'Inter, sans-serif',
-    heading: 'Adieu, sans-serif',
+    body: '"Courier New", Inter, sans-serif',
+    heading: '"Courier New", Adieu, sans-serif',
   },
-})
+  textShadow: {
+    none: 'none',
+    white: '0px 0px 10px #FFF',
+  },
+});
 
 const flexAlignment = [
   'flex-start',
@@ -298,13 +309,13 @@ const flexAlignment = [
   'baseline',
   'space-around',
   'space-between',
-] as const
+] as const;
 
-const overflow = ['hidden', 'inherit', 'scroll', 'visible', 'auto'] as const
+const overflow = ['hidden', 'inherit', 'scroll', 'visible', 'auto'] as const;
 
-const borderWidth = ['0px', '0.5px', '1px', '1.5px', '2px', '3px', '4px']
+const borderWidth = ['0px', '0.5px', '1px', '1.5px', '2px', '3px', '4px'];
 
-const borderStyle = ['none', 'solid'] as const
+const borderStyle = ['none', 'solid'] as const;
 
 export const breakpoints = {
   sm: 640,
@@ -313,7 +324,7 @@ export const breakpoints = {
   xl: 1280,
   xxl: 1536,
   xxxl: 1920,
-}
+};
 
 const layoutStyles = defineProperties({
   conditions: {
@@ -360,7 +371,15 @@ const layoutStyles = defineProperties({
     flexShrink: spacing,
     flex: ['1', '1.5', '2', '3'],
     flexWrap: ['nowrap', 'wrap', 'wrap-reverse'],
-    display: ['none', 'block', 'flex', 'inline-flex', 'inline-block', 'grid', 'inline'],
+    display: [
+      'none',
+      'block',
+      'flex',
+      'inline-flex',
+      'inline-block',
+      'grid',
+      'inline',
+    ],
     whiteSpace: ['nowrap'],
     textOverflow: ['ellipsis'],
     textAlign: ['left', 'right', 'center', 'justify'],
@@ -378,7 +397,7 @@ const layoutStyles = defineProperties({
     marginX: ['marginLeft', 'marginRight'],
     marginY: ['marginTop', 'marginBottom'],
   },
-})
+});
 
 const colorStyles = defineProperties({
   conditions: {
@@ -400,8 +419,9 @@ const colorStyles = defineProperties({
     backgroundColor: vars.color,
     outlineColor: vars.color,
     fill: vars.color,
+    textShadow: vars.textShadow,
   },
-})
+});
 
 const unresponsiveProperties = defineProperties({
   conditions: {
@@ -432,12 +452,20 @@ const unresponsiveProperties = defineProperties({
     overflow,
     overflowX: overflow,
     overflowY: overflow,
-    boxShadow: { ...themeVars.shadows, none: 'none', dropShadow: vars.color.dropShadow },
+    boxShadow: {
+      ...themeVars.shadows,
+      none: 'none',
+      dropShadow: vars.color.dropShadow,
+    },
     transition: vars.time,
     transitionDuration: vars.time,
     animationDuration: vars.time,
   },
-})
+});
 
-export const sprinkles = createSprinkles(layoutStyles, colorStyles, unresponsiveProperties)
-export type Sprinkles = Parameters<typeof sprinkles>[0]
+export const sprinkles = createSprinkles(
+  layoutStyles,
+  colorStyles,
+  unresponsiveProperties
+);
+export type Sprinkles = Parameters<typeof sprinkles>[0];

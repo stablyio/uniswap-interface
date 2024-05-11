@@ -1,26 +1,63 @@
-import { style } from '@vanilla-extract/css'
+import { style } from '@vanilla-extract/css';
 
-import { sprinkles } from './sprinkles.css'
+import { sprinkles } from './sprinkles.css';
 
 export const center = sprinkles({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-})
+});
 
 // TYPOGRAPHY
-export const headlineMedium = sprinkles({ fontWeight: 'medium', fontSize: '28', lineHeight: '36' })
-export const headlineSmall = sprinkles({ fontWeight: 'medium', fontSize: '20', lineHeight: '28' })
+export const headlineMedium = sprinkles({
+  fontWeight: 'medium',
+  fontSize: '28',
+  lineHeight: '36',
+});
+export const headlineSmall = sprinkles({
+  fontWeight: 'medium',
+  fontSize: '20',
+  lineHeight: '28',
+});
 
-export const subhead = sprinkles({ fontWeight: 'book', fontSize: '16', lineHeight: '24' })
-export const subheadSmall = sprinkles({ fontWeight: 'book', fontSize: '14', lineHeight: '14' })
+export const subhead = sprinkles({
+  fontWeight: 'book',
+  fontSize: '16',
+  lineHeight: '24',
+  fontFamily: 'body',
+});
+export const subheadSmall = sprinkles({
+  fontWeight: 'book',
+  fontSize: '14',
+  lineHeight: '14',
+});
 
-export const body = sprinkles({ fontWeight: 'book', fontSize: '16', lineHeight: '24' })
-export const bodySmall = sprinkles({ fontWeight: 'book', fontSize: '14', lineHeight: '20' })
-export const caption = sprinkles({ fontWeight: 'book', fontSize: '12', lineHeight: '16' })
+export const body = sprinkles({
+  fontWeight: 'book',
+  fontSize: '16',
+  lineHeight: '24',
+});
+export const bodySmall = sprinkles({
+  fontWeight: 'book',
+  fontSize: '14',
+  lineHeight: '20',
+});
+export const caption = sprinkles({
+  fontWeight: 'book',
+  fontSize: '12',
+  lineHeight: '16',
+});
 
-export const buttonTextMedium = sprinkles({ fontWeight: 'medium', fontSize: '16', lineHeight: '20' })
-export const buttonTextSmall = sprinkles({ fontWeight: 'medium', fontSize: '14', lineHeight: '16' })
+export const buttonTextMedium = sprinkles({
+  fontWeight: 'medium',
+  fontSize: '16',
+  lineHeight: '20',
+});
+export const buttonTextSmall = sprinkles({
+  fontWeight: 'medium',
+  fontSize: '14',
+  lineHeight: '16',
+});
 
 const magicalGradient = style({
   selectors: {
@@ -28,9 +65,11 @@ const magicalGradient = style({
       content: '',
       position: 'absolute',
       inset: '-1px',
-      background: 'linear-gradient(45deg, #FC72FF80 0%, #FC72FF80 100.13%) border-box',
+      background:
+        'linear-gradient(45deg, #FC72FF80 0%, #FC72FF80 100.13%) border-box',
       borderColor: 'transparent',
-      WebkitMask: 'linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);',
+      WebkitMask:
+        'linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);',
       WebkitMaskComposite: 'xor;',
       maskComposite: 'exclude',
       borderStyle: 'solid',
@@ -39,7 +78,7 @@ const magicalGradient = style({
       pointerEvents: 'none',
     },
   },
-})
+});
 
 export const magicalGradientOnHover = style([
   magicalGradient,
@@ -57,4 +96,4 @@ export const magicalGradientOnHover = style([
       },
     },
   },
-])
+]);
