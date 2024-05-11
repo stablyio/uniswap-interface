@@ -1,17 +1,17 @@
-import Column from 'components/Column';
-import { ScrollBarStyles } from 'components/Common';
+import Column from 'components/Column'
+import { ScrollBarStyles } from 'components/Common'
 // import Row from 'components/Row';
 // import { Trans } from 'i18n';
 // import { Socials } from 'pages/Landing/sections/Footer';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 // import { Text } from 'rebass';
 // import { useOpenModal } from 'state/application/hooks';
 // import { ApplicationModal } from 'state/application/reducer';
-import styled, { css } from 'styled-components';
-import { BREAKPOINTS } from 'theme';
-import { ExternalLink, ThemedText } from 'theme/components';
+import styled, { css } from 'styled-components'
+import { BREAKPOINTS } from 'theme'
+import { ExternalLink, ThemedText } from 'theme/components'
 
-import { MenuItem, MenuSection, useMenuContent } from './menuContent';
+import { MenuItem, MenuSection, useMenuContent } from './menuContent'
 // import { MobileAppLogo } from './MobileAppLogo';
 
 const Container = styled.div`
@@ -38,7 +38,7 @@ const Container = styled.div`
     top: unset;
     bottom: 50px;
   }
-`;
+`
 const LinkStyles = css`
   font-size: 16px;
   text-decoration: none;
@@ -47,16 +47,16 @@ const LinkStyles = css`
     color: ${({ theme }) => theme.accent1};
     opacity: 1;
   }
-`;
+`
 const StyledInternalLink = styled(Link)<{ canHide?: boolean }>`
   ${LinkStyles}
   @media screen and (max-width: ${BREAKPOINTS.md}px), (min-width: ${BREAKPOINTS.xl}px) {
     display: ${({ canHide }) => (canHide ? 'none' : 'block')};
   }
-`;
+`
 const StyledExternalLink = styled(ExternalLink)`
   ${LinkStyles}
-`;
+`
 // const Separator = styled.div`
 //   width: 100%;
 //   height: 1px;
@@ -78,7 +78,7 @@ function Item({ label, href, internal, overflow, closeMenu }: MenuItem) {
     </StyledInternalLink>
   ) : (
     <StyledExternalLink href={href}>{label}</StyledExternalLink>
-  );
+  )
 }
 
 function Section({ title, items, closeMenu }: MenuSection) {
@@ -96,11 +96,11 @@ function Section({ title, items, closeMenu }: MenuSection) {
         />
       ))}
     </Column>
-  );
+  )
 }
 export function Menu({ close }: { close: () => void }) {
   // const openGetTheAppModal = useOpenModal(ApplicationModal.GET_THE_APP);
-  const menuContent = useMenuContent();
+  const menuContent = useMenuContent()
 
   return (
     <Container data-testid="nav-more-menu">
@@ -135,5 +135,5 @@ export function Menu({ close }: { close: () => void }) {
         <StyledSocials iconSize="25px" /> */}
       </Column>
     </Container>
-  );
+  )
 }

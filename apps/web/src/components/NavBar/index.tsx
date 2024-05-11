@@ -1,66 +1,53 @@
-import { MenuIcon } from '@heroicons/react/outline';
-import { useWeb3React } from '@web3-react/core';
+import { MenuIcon } from '@heroicons/react/outline'
+import { useWeb3React } from '@web3-react/core'
 // import { UniIcon } from 'components/Logo/UniIcon'
-import Web3Status from 'components/Web3Status';
+import Web3Status from 'components/Web3Status'
 // import { chainIdToBackendName } from 'graphql/data/util'
 // import { useDisableNFTRoutes } from 'hooks/useDisableNFTRoutes'
 // import { useIsLandingPage } from 'hooks/useIsLandingPage'
-import { useIsNftPage } from 'hooks/useIsNftPage';
+import { useIsNftPage } from 'hooks/useIsNftPage'
 // import { useIsPoolsPage } from 'hooks/useIsPoolsPage'
-import { Trans } from 'i18n';
-import { Box } from 'nft/components/Box';
-import { Row } from 'nft/components/Flex';
-import { useProfilePageState } from 'nft/hooks';
-import { ProfilePageStateType } from 'nft/types';
+import { Trans } from 'i18n'
+import { Box } from 'nft/components/Box'
+import { Row } from 'nft/components/Flex'
+import { useProfilePageState } from 'nft/hooks'
+import { ProfilePageStateType } from 'nft/types'
 // import { GetTheAppButton } from 'pages/Landing/components/DownloadApp/GetTheAppButton'
-import { ReactNode, useCallback, useState } from 'react';
-import {
-  NavLink,
-  NavLinkProps,
-  useLocation,
-  useNavigate,
-} from 'react-router-dom';
-import styled from 'styled-components';
+import { ReactNode, useCallback, useState } from 'react'
+import { NavLink, NavLinkProps, useLocation, useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
 
-import { useAccountDrawer } from 'components/AccountDrawer/MiniPortfolio/hooks';
-import { Z_INDEX } from 'theme/zIndex';
+import { useAccountDrawer } from 'components/AccountDrawer/MiniPortfolio/hooks'
+import { Z_INDEX } from 'theme/zIndex'
 // import { Chain } from 'uniswap/src/data/graphql/uniswap-data-api/__generated__/types-and-hooks'
 // import { useIsNavSearchInputVisible } from '../../nft/hooks/useIsNavSearchInputVisible'
-import { Bag } from './Bag';
-import Blur from './Blur';
-import { ChainSelector } from './ChainSelector';
-import { More } from './More';
+import { Bag } from './Bag'
+import Blur from './Blur'
+import { ChainSelector } from './ChainSelector'
+import { More } from './More'
 // import { SearchBar } from './SearchBar'
-import { MobileMenu, MobileMenuButton } from './MobileMenu';
-import { UNISWAP_ROUTES } from './NavLinks';
-import * as styles from './style.css';
+import { MobileMenu, MobileMenuButton } from './MobileMenu'
+import { UNISWAP_ROUTES } from './NavLinks'
+import * as styles from './style.css'
 
 const Nav = styled.nav<{ isConnected?: boolean }>`
   font-family: inherit;
-  padding: ${({ theme, isConnected }) =>
-    isConnected ? '8px 8px 8px 20px' : `${theme.navVerticalPad}px 20px`};
+  padding: ${({ theme, isConnected }) => (isConnected ? '8px 8px 8px 20px' : `${theme.navVerticalPad}px 20px`)};
   width: 100%;
   height: ${({ theme }) => theme.navHeight}px;
   z-index: ${Z_INDEX.sticky};
-`;
+`
 
 interface MenuItemProps {
-  href: string;
-  id?: NavLinkProps['id'];
-  isActive?: boolean;
-  children: ReactNode;
-  dataTestId?: string;
-  reloadDocument?: boolean;
+  href: string
+  id?: NavLinkProps['id']
+  isActive?: boolean
+  children: ReactNode
+  dataTestId?: string
+  reloadDocument?: boolean
 }
 
-const MenuItem = ({
-  href,
-  dataTestId,
-  id,
-  isActive,
-  children,
-  reloadDocument,
-}: MenuItemProps) => {
+const MenuItem = ({ href, dataTestId, id, isActive, children, reloadDocument }: MenuItemProps) => {
   return (
     <NavLink
       to={href}
@@ -72,11 +59,11 @@ const MenuItem = ({
     >
       {children}
     </NavLink>
-  );
-};
+  )
+}
 
 export const PageTabs = () => {
-  const { pathname } = useLocation();
+  const { pathname } = useLocation()
   // const { chainId: connectedChainId } = useWeb3React()
   // const chainName = chainIdToBackendName(connectedChainId)
 
@@ -87,16 +74,10 @@ export const PageTabs = () => {
 
   return (
     <>
-      <MenuItem
-        href={UNISWAP_ROUTES.swap}
-        isActive={pathname.startsWith('/swap')}
-      >
+      <MenuItem href={UNISWAP_ROUTES.swap} isActive={pathname.startsWith('/swap')}>
         <Trans>Swap</Trans>
       </MenuItem>
-      <MenuItem
-        href={UNISWAP_ROUTES.liquidity}
-        isActive={pathname.includes('/pool')}
-      >
+      <MenuItem href={UNISWAP_ROUTES.liquidity} isActive={pathname.includes('/pool')}>
         Liquidity
       </MenuItem>
       <MenuItem href={UNISWAP_ROUTES.moneyMarket} reloadDocument={true}>
@@ -105,11 +86,7 @@ export const PageTabs = () => {
       <MenuItem href={UNISWAP_ROUTES.lendingBorrow} reloadDocument={true}>
         Lend/Borrow
       </MenuItem>
-      <MenuItem
-        href={UNISWAP_ROUTES.incentivize}
-        reloadDocument={true}
-        isActive={pathname.includes('/incentivize')}
-      >
+      <MenuItem href={UNISWAP_ROUTES.incentivize} reloadDocument={true} isActive={pathname.includes('/incentivize')}>
         Incentivize
       </MenuItem>
       {/*
@@ -122,36 +99,36 @@ export const PageTabs = () => {
       </MenuItem> */}
       <More />
     </>
-  );
-};
+  )
+}
 
 const Navbar = ({ blur }: { blur: boolean }) => {
-  const isNftPage = useIsNftPage();
+  const isNftPage = useIsNftPage()
   // const isLandingPage = useIsLandingPage()
-  const sellPageState = useProfilePageState((state) => state.state);
-  const navigate = useNavigate();
+  const sellPageState = useProfilePageState((state) => state.state)
+  const navigate = useNavigate()
   // const isNavSearchInputVisible = useIsNavSearchInputVisible()
 
-  const { account } = useWeb3React();
-  const [accountDrawerOpen, toggleAccountDrawer] = useAccountDrawer();
-  const [isMobileNavOpen, setMobileNavOpen] = useState(false);
+  const { account } = useWeb3React()
+  const [accountDrawerOpen, toggleAccountDrawer] = useAccountDrawer()
+  const [isMobileNavOpen, setMobileNavOpen] = useState(false)
 
   const handleMobileNav = useCallback(() => {
-    setMobileNavOpen(!isMobileNavOpen);
-  }, [isMobileNavOpen]);
+    setMobileNavOpen(!isMobileNavOpen)
+  }, [isMobileNavOpen])
 
   const handleLogoClick = useCallback(() => {
     if (account) {
-      return;
+      return
     }
     if (accountDrawerOpen) {
-      toggleAccountDrawer();
+      toggleAccountDrawer()
     }
     navigate({
       pathname: '/',
       search: '',
-    });
-  }, [account, accountDrawerOpen, navigate, toggleAccountDrawer]);
+    })
+  }, [account, accountDrawerOpen, navigate, toggleAccountDrawer])
 
   return (
     <>
@@ -168,12 +145,7 @@ const Navbar = ({ blur }: { blur: boolean }) => {
                 clickable={!account}
                 onClick={handleUniIconClick}
               /> */}
-              <img
-                src="/uniswap-static/images/trinity.svg"
-                height="40px"
-                width="40px"
-                alt="Trinity"
-              />
+              <img src="/uniswap-static/images/trinity.svg" height="40px" width="40px" alt="Trinity" />
             </Box>
             {!isNftPage && (
               <Box display={{ sm: 'flex', lg: 'none' }}>
@@ -197,9 +169,7 @@ const Navbar = ({ blur }: { blur: boolean }) => {
               {/* <Box position="relative" display={isNavSearchInputVisible ? 'none' : { sm: 'flex' }}>
                 <SearchBar />
               </Box> */}
-              {isNftPage && sellPageState !== ProfilePageStateType.LISTING && (
-                <Bag />
-              )}
+              {isNftPage && sellPageState !== ProfilePageStateType.LISTING && <Bag />}
               {!isNftPage && (
                 <Box display={{ sm: 'none', lg: 'flex' }}>
                   <ChainSelector />
@@ -208,9 +178,7 @@ const Navbar = ({ blur }: { blur: boolean }) => {
               {/* {isLandingPage && <GetTheAppButton />} */}
               <Web3Status />
               <Box display={{ sm: 'flex', lg: 'none' }}>
-                <MobileMenuButton
-                  onClick={() => setMobileNavOpen(!isMobileNavOpen)}
-                >
+                <MobileMenuButton onClick={() => setMobileNavOpen(!isMobileNavOpen)}>
                   <MenuIcon color="#F1F1F3" width="20px" height="20px" />
                 </MobileMenuButton>
               </Box>
@@ -224,7 +192,7 @@ const Navbar = ({ blur }: { blur: boolean }) => {
         />
       </Nav>
     </>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar

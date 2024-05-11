@@ -1,7 +1,7 @@
-import { style } from '@vanilla-extract/css';
+import { style } from '@vanilla-extract/css'
 
-import { subhead } from '../../nft/css/common.css';
-import { sprinkles, vars } from '../../nft/css/sprinkles.css';
+import { subhead } from '../../nft/css/common.css'
+import { sprinkles, vars } from '../../nft/css/sprinkles.css'
 
 export const logoContainer = style([
   sprinkles({
@@ -15,14 +15,14 @@ export const logoContainer = style([
     transition: '0.3s ease all',
     ':hover': { opacity: 0.7 },
   },
-]);
+])
 
 export const logo = style([
   sprinkles({
     display: 'block',
     color: 'accent1',
   }),
-]);
+])
 
 export const baseSideContainer = style([
   sprinkles({
@@ -31,7 +31,7 @@ export const baseSideContainer = style([
     flex: '1',
     flexShrink: '2',
   }),
-]);
+])
 
 export const leftSideContainer = style([
   baseSideContainer,
@@ -39,7 +39,7 @@ export const leftSideContainer = style([
     alignItems: 'center',
     justifyContent: 'flex-start',
   }),
-]);
+])
 
 export const searchContainer = style([
   sprinkles({
@@ -52,7 +52,7 @@ export const searchContainer = style([
     alignItems: 'flex-start',
   }),
   { height: '42px' },
-]);
+])
 
 export const rightSideContainer = style([
   baseSideContainer,
@@ -60,7 +60,7 @@ export const rightSideContainer = style([
     alignItems: 'center',
     justifyContent: 'flex-end',
   }),
-]);
+])
 
 const baseMenuItem = style([
   subhead,
@@ -88,14 +88,14 @@ const baseMenuItem = style([
       color: vars.color.white,
     },
   },
-]);
+])
 
 export const menuItem = style([
   baseMenuItem,
   sprinkles({
     color: 'neutral2',
   }),
-]);
+])
 
 export const activeMenuItem = style([
   baseMenuItem,
@@ -104,4 +104,4 @@ export const activeMenuItem = style([
     background: 'none',
     textShadow: 'white',
   }),
-]);
+])

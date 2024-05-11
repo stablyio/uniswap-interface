@@ -1,13 +1,13 @@
-import { style } from '@vanilla-extract/css';
-import { subhead, subheadSmall } from 'nft/css/common.css';
+import { style } from '@vanilla-extract/css'
+import { subhead, subheadSmall } from 'nft/css/common.css'
 
-import { breakpoints, sprinkles, vars } from '../../nft/css/sprinkles.css';
+import { breakpoints, sprinkles, vars } from '../../nft/css/sprinkles.css'
 
-const DESKTOP_NAVBAR_WIDTH = 330;
-const DESKTOP_NAVBAR_WIDTH_MD = 360;
-const DESKTOP_NAVBAR_WIDTH_L = 480;
-const DESKTOP_NAVBAR_WIDTH_XL = 520;
-const DESKTOP_NAVBAR_WIDTH_XXL = 640;
+const DESKTOP_NAVBAR_WIDTH = 330
+const DESKTOP_NAVBAR_WIDTH_MD = 360
+const DESKTOP_NAVBAR_WIDTH_L = 480
+const DESKTOP_NAVBAR_WIDTH_XL = 520
+const DESKTOP_NAVBAR_WIDTH_XXL = 640
 
 const baseSearchStyle = style([
   sprinkles({
@@ -25,7 +25,7 @@ const baseSearchStyle = style([
       },
     },
   },
-]);
+])
 
 const baseSearchNftStyle = style([
   baseSearchStyle,
@@ -48,7 +48,7 @@ const baseSearchNftStyle = style([
       },
     },
   },
-]);
+])
 
 export const searchBarContainerNft = style([
   sprinkles({
@@ -63,11 +63,11 @@ export const searchBarContainerNft = style([
     backdropFilter: 'blur(60px)',
     borderRadius: '16px',
   },
-]);
+])
 
 export const searchBarContainerDisableBlur = style({
   backdropFilter: 'none',
-});
+})
 
 export const searchBar = style([
   baseSearchStyle,
@@ -75,7 +75,7 @@ export const searchBar = style([
     color: 'neutral2',
     paddingX: '12',
   }),
-]);
+])
 
 export const nftSearchBar = style([
   baseSearchNftStyle,
@@ -86,7 +86,7 @@ export const nftSearchBar = style([
   {
     backdropFilter: 'blur(60px)',
   },
-]);
+])
 
 export const searchBarInput = style([
   sprinkles({
@@ -99,7 +99,7 @@ export const searchBarInput = style([
     lineHeight: '24',
     height: 'full',
   }),
-]);
+])
 
 export const searchBarDropdownNft = style([
   baseSearchNftStyle,
@@ -113,11 +113,11 @@ export const searchBarDropdownNft = style([
     backdropFilter: 'blur(60px)',
     borderTop: 'none',
   },
-]);
+])
 
 export const searchBarScrollable = sprinkles({
   overflowY: 'auto',
-});
+})
 
 export const suggestionRow = style([
   sprinkles({
@@ -135,14 +135,14 @@ export const suggestionRow = style([
     },
     textDecoration: 'none',
   },
-]);
+])
 
 export const suggestionImage = sprinkles({
   width: '36',
   height: '36',
   borderRadius: 'round',
   marginRight: '8',
-});
+})
 
 export const suggestionPrimaryContainer = style([
   sprinkles({
@@ -151,12 +151,12 @@ export const suggestionPrimaryContainer = style([
   {
     width: '90%',
   },
-]);
+])
 
 export const suggestionSecondaryContainer = sprinkles({
   textAlign: 'right',
   alignItems: 'flex-end',
-});
+})
 
 export const primaryText = style([
   subhead,
@@ -169,7 +169,7 @@ export const primaryText = style([
   {
     lineHeight: '24px',
   },
-]);
+])
 
 export const secondaryText = style([
   subheadSmall,
@@ -179,7 +179,7 @@ export const secondaryText = style([
   {
     lineHeight: '20px',
   },
-]);
+])
 
 export const imageHolder = style([
   suggestionImage,
@@ -187,12 +187,12 @@ export const imageHolder = style([
     background: 'surface2',
     flexShrink: '0',
   }),
-]);
+])
 
 export const suggestionIcon = sprinkles({
   display: 'flex',
   flexShrink: '0',
-});
+})
 
 export const sectionHeader = style([
   subheadSmall,
@@ -202,7 +202,7 @@ export const sectionHeader = style([
   {
     lineHeight: '20px',
   },
-]);
+])
 
 export const notFoundContainer = style([
   sectionHeader,
@@ -210,7 +210,7 @@ export const notFoundContainer = style([
     paddingY: '4',
     paddingLeft: '16',
   }),
-]);
+])
 
 export const hidden = style([
   sprinkles({
@@ -219,14 +219,14 @@ export const hidden = style([
     padding: '0',
     height: '0',
   }),
-]);
+])
 export const visible = style([
   sprinkles({
     visibility: 'visible',
     opacity: '1',
     height: 'full',
   }),
-]);
+])
 
 export const searchContentLeftAlign = style({
   '@media': {
@@ -236,4 +236,4 @@ export const searchContentLeftAlign = style({
       transitionTimingFunction: 'ease-in',
     },
   },
-});
+})

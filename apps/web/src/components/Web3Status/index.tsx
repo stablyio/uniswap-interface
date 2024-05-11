@@ -26,15 +26,15 @@ import styled from 'styled-components';
 import { flexRowNoWrap } from 'theme/styles';
 import { shortenAddress } from 'utilities/src/addresses';
 
+import { ReactComponent as WalletIcon } from 'assets/wallets/wallet.svg';
 import { PrefetchBalancesWrapper } from 'graphql/data/apollo/TokenBalancesProvider';
+import { Box } from 'nft/components/Box';
 import { Unitag } from 'ui/src/components/icons/Unitag';
-import { HeaderButton } from 'components/NavBar/HeaderButton';
 import { useUnitagByAddressWithoutFlag } from 'uniswap/src/features/unitags/hooksWithoutFlags';
 import { ButtonSecondary } from '../Button';
 import StatusIcon from '../Identicon/StatusIcon';
 import { RowBetween } from '../Row';
-import { ReactComponent as WalletIcon } from 'assets/wallets/wallet.svg';
-import { Box } from 'nft/components/Box';
+import { HeaderButton } from 'components/NavBar/HeaderButton';
 
 // https://stackoverflow.com/a/31617326
 const FULL_BORDER_RADIUS = 9999;

@@ -1,8 +1,5 @@
-import {
-  createGlobalTheme,
-  createGlobalThemeContract,
-} from '@vanilla-extract/css';
-import { createSprinkles, defineProperties } from '@vanilla-extract/sprinkles';
+import { createGlobalTheme, createGlobalThemeContract } from '@vanilla-extract/css'
+import { createSprinkles, defineProperties } from '@vanilla-extract/sprinkles'
 
 const themeContractValues = {
   colors: {
@@ -44,19 +41,16 @@ const themeContractValues = {
     hover: '0.6',
     pressed: '0.4',
   },
-};
+}
 
-export type Theme = typeof themeContractValues;
+export type Theme = typeof themeContractValues
 
-export const themeVars = createGlobalThemeContract(
-  themeContractValues,
-  (_, path) => `genie-${path.join('-')}`
-);
+export const themeVars = createGlobalThemeContract(themeContractValues, (_, path) => `genie-${path.join('-')}`)
 
 export const navDimensions = {
   height: 48, // 72,
   verticalPad: 8, // 20,
-};
+}
 
 const dimensions = {
   '0': '0',
@@ -101,7 +95,7 @@ const dimensions = {
   viewWidth: '100vw',
   auto: 'auto',
   inherit: 'inherit',
-};
+}
 
 const spacing = {
   '0': '0',
@@ -137,7 +131,7 @@ const spacing = {
   '1/2': '50%',
   auto: 'auto',
   unset: 'unset',
-};
+}
 
 const zIndices = {
   auto: 'auto',
@@ -153,7 +147,7 @@ const zIndices = {
   popover: '1070',
   tooltip: '1080',
   modalOverTooltip: '1090',
-};
+}
 
 export const vars = createGlobalTheme(':root', {
   color: {
@@ -299,7 +293,7 @@ export const vars = createGlobalTheme(':root', {
     none: 'none',
     white: '0px 0px 10px #FFF',
   },
-});
+})
 
 const flexAlignment = [
   'flex-start',
@@ -309,13 +303,13 @@ const flexAlignment = [
   'baseline',
   'space-around',
   'space-between',
-] as const;
+] as const
 
-const overflow = ['hidden', 'inherit', 'scroll', 'visible', 'auto'] as const;
+const overflow = ['hidden', 'inherit', 'scroll', 'visible', 'auto'] as const
 
-const borderWidth = ['0px', '0.5px', '1px', '1.5px', '2px', '3px', '4px'];
+const borderWidth = ['0px', '0.5px', '1px', '1.5px', '2px', '3px', '4px']
 
-const borderStyle = ['none', 'solid'] as const;
+const borderStyle = ['none', 'solid'] as const
 
 export const breakpoints = {
   sm: 640,
@@ -324,7 +318,7 @@ export const breakpoints = {
   xl: 1280,
   xxl: 1536,
   xxxl: 1920,
-};
+}
 
 const layoutStyles = defineProperties({
   conditions: {
@@ -371,15 +365,7 @@ const layoutStyles = defineProperties({
     flexShrink: spacing,
     flex: ['1', '1.5', '2', '3'],
     flexWrap: ['nowrap', 'wrap', 'wrap-reverse'],
-    display: [
-      'none',
-      'block',
-      'flex',
-      'inline-flex',
-      'inline-block',
-      'grid',
-      'inline',
-    ],
+    display: ['none', 'block', 'flex', 'inline-flex', 'inline-block', 'grid', 'inline'],
     whiteSpace: ['nowrap'],
     textOverflow: ['ellipsis'],
     textAlign: ['left', 'right', 'center', 'justify'],
@@ -397,7 +383,7 @@ const layoutStyles = defineProperties({
     marginX: ['marginLeft', 'marginRight'],
     marginY: ['marginTop', 'marginBottom'],
   },
-});
+})
 
 const colorStyles = defineProperties({
   conditions: {
@@ -421,7 +407,7 @@ const colorStyles = defineProperties({
     fill: vars.color,
     textShadow: vars.textShadow,
   },
-});
+})
 
 const unresponsiveProperties = defineProperties({
   conditions: {
@@ -461,11 +447,7 @@ const unresponsiveProperties = defineProperties({
     transitionDuration: vars.time,
     animationDuration: vars.time,
   },
-});
+})
 
-export const sprinkles = createSprinkles(
-  layoutStyles,
-  colorStyles,
-  unresponsiveProperties
-);
-export type Sprinkles = Parameters<typeof sprinkles>[0];
+export const sprinkles = createSprinkles(layoutStyles, colorStyles, unresponsiveProperties)
+export type Sprinkles = Parameters<typeof sprinkles>[0]
