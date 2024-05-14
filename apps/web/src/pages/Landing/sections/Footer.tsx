@@ -40,7 +40,7 @@ const MenuItemStyles = css`
   padding: 0;
   margin: 0;
   text-align: left;
-  font-family: Basel;
+  font-family: 'Courier New';
   font-size: 16px;
   font-style: normal;
   font-weight: 500;

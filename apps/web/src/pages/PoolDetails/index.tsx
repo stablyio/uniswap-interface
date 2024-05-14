@@ -28,6 +28,7 @@ const PageWrapper = styled(Row)`
   width: 100%;
   gap: 40px;
   align-items: flex-start;
+  z-index: 2;
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoint.md}px) {
     padding: 48px 20px;
