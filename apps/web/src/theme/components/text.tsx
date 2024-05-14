@@ -9,6 +9,7 @@ const TextWrapper = styled(Text).withConfig({
   shouldForwardProp: (prop) => prop !== 'color',
 })<{ color: keyof string }>`
   color: ${({ color, theme }) => (theme as any)[color]};
+  font-family: ${({ theme }) => theme.fonts.code};
   letter-spacing: -0.01em;
 `
 

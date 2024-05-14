@@ -37,6 +37,7 @@ const ContentWrapper = styled(Column)`
 `
 
 const ChainSelectorWrapper = styled.div`
+  font-family: ${({ theme }) => theme.fonts.code};
   background-color: ${({ theme }) => theme.surface2};
   border-radius: 12px;
 `
@@ -187,7 +188,7 @@ export function CurrencySearch({
       >
         <PaddedColumn gap="16px">
           <RowBetween>
-            <Text fontWeight={535} fontSize={16}>
+            <Text fontWeight={535} fontSize={16} fontFamily={theme.fonts.code}>
               <Trans>Select a token</Trans>
             </Text>
             <CloseIcon onClick={onDismiss} />

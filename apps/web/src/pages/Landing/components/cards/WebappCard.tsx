@@ -71,7 +71,7 @@ const TokenRow = styled.div`
 const TokenName = styled.h3`
   padding: 0;
   margin: 0;
-  font-family: Basel;
+  font-family: 'Courier New';
   font-size: 24px;
   font-style: normal;
   font-weight: 500;
@@ -95,7 +95,7 @@ const TokenName = styled.h3`
 const TokenTicker = styled.h3`
   padding: 0;
   margin: 0;
-  font-family: Basel;
+  font-family: 'Courier New';
   font-size: 24px;
   font-style: normal;
   font-weight: 500;
@@ -116,7 +116,7 @@ const TokenTicker = styled.h3`
 const TokenPrice = styled.h3`
   padding: 0;
   margin: 0;
-  font-family: Basel;
+  font-family: 'Courier New';
   font-size: 24px;
   font-style: normal;
   font-weight: 500;
@@ -136,7 +136,7 @@ const DeltaText = styled.h3`
   text-align: right;
   padding: 0;
   margin: 0;
-  font-family: Basel;
+  font-family: 'Courier New';
   font-size: 24px;
   font-style: normal;
   font-weight: 500;
@@ -246,7 +246,10 @@ export function WebappCard(props: WebappCardProps) {
       minHeight="450px"
       isDarkMode={props.isDarkMode}
       textColor={primary}
-      backgroundColor={{ dark: 'rgba(0, 102, 255, 0.12)', light: 'rgba(0, 102, 255, 0.04)' }}
+      backgroundColor={{
+        dark: 'rgba(0, 102, 255, 0.12)',
+        light: 'rgba(0, 102, 255, 0.04)',
+      }}
       button={<PillButton color={primary} label={t`Web app`} icon={<Computer size="24px" fill={primary} />} />}
       titleText={t`Swapping made simple. Access thousands of tokens on 8+ chains.`}
     >

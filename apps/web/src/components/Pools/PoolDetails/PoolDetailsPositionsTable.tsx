@@ -21,6 +21,7 @@ const PositionTableWrapper = styled(Column)`
   gap: 24px;
   margin-top: 24px;
   width: 100%;
+  z-index: 2;
 `
 
 const PositionWrapper = styled(Column)`

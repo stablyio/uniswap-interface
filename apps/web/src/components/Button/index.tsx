@@ -31,12 +31,13 @@ type BaseButtonProps = {
 } & ButtonProps
 
 export const BaseButton = styled(RebassButton)<BaseButtonProps>`
+  font-family: ${({ theme }) => theme.fonts.code};
   padding: ${({ padding }) => padding ?? '16px'};
   width: ${({ width }) => width ?? '100%'};
   line-height: 24px;
   font-weight: 535;
   text-align: center;
-  border-radius: ${({ $borderRadius }) => $borderRadius ?? '16px'};
+  border-radius: ${({ $borderRadius }) => $borderRadius ?? '8px'};
   outline: none;
   border: 1px solid transparent;
   color: ${({ theme }) => theme.neutral1};
@@ -68,7 +69,8 @@ export const BaseButton = styled(RebassButton)<BaseButtonProps>`
 `
 
 export const ButtonPrimary = styled(BaseButton)`
-  background-color: ${({ theme }) => theme.accent1};
+  background-color: ${({ theme }) => theme.accent2};
+  font-family: ${({ theme }) => theme.fonts.code};
   font-size: 20px;
   font-weight: 535;
   padding: 16px;
@@ -105,17 +107,22 @@ export const SmallButtonPrimary = styled(ButtonPrimary)`
 `
 
 const BaseButtonLight = styled(BaseButton)`
-  background-color: ${({ theme }) => theme.accent2};
-  color: ${({ theme }) => theme.accent1};
+  background-color: ${({ theme, variant }) =>
+    variant === 'primary' ? theme.accent2 : variant === 'tertiary' ? theme.accent2 : theme.surface1};
+  color: ${({ theme }) => theme.neutral1};
   font-size: 20px;
   font-weight: 535;
 
   &:focus {
-    box-shadow: 0 0 0 1pt ${({ theme, disabled }) => !disabled && theme.accent2};
-    background-color: ${({ theme, disabled }) => !disabled && theme.accent2};
+    box-shadow: 0 0 0 1pt
+      ${({ theme, disabled, variant }) =>
+        !disabled && (variant === 'primary' ? theme.accent1 : variant === 'tertiary' ? theme.accent2 : theme.surface1)};
+    background-color: ${({ theme, disabled, variant }) =>
+      !disabled && (variant === 'primary' ? theme.accent1 : variant === 'tertiary' ? theme.accent2 : theme.surface1)};
   }
   &:hover {
-    background-color: ${({ theme, disabled }) => !disabled && theme.accent2};
+    background-color: ${({ theme, disabled, variant }) =>
+      !disabled && (variant === 'primary' ? theme.accent1 : variant === 'tertiary' ? theme.accent2 : theme.surface1)};
   }
   &:active {
     box-shadow: 0 0 0 1pt ${({ theme, disabled }) => !disabled && theme.accent2};

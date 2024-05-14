@@ -61,6 +61,7 @@ const CurrencySelect = styled(ButtonGray)<{
   pointerEvents?: string
 }>`
   align-items: center;
+  font-family: ${({ theme }) => theme.fonts.code};
   background-color: ${({ selected, theme }) => (selected ? theme.surface1 : theme.accent1)};
   opacity: ${({ disabled }) => (!disabled ? 1 : 0.4)};
   box-shadow: ${({ theme }) => theme.deprecated_shallowShadow};
@@ -121,6 +122,7 @@ const Aligner = styled.span`
 `
 
 const StyledDropDown = styled(DropDown)<{ selected: boolean }>`
+  font-family: ${({ theme }) => theme.fonts.code};
   margin: 0 0.25rem 0 0.35rem;
   height: 35%;
 
@@ -131,6 +133,7 @@ const StyledDropDown = styled(DropDown)<{ selected: boolean }>`
 `
 
 const StyledTokenName = styled.span<{ active?: boolean }>`
+  font-family: ${({ theme }) => theme.fonts.code};
   ${({ active }) => (active ? '  margin: 0 0.25rem 0 0.25rem;' : '  margin: 0 0.25rem 0 0.25rem;')}
   font-size: 20px;
   white-space: nowrap;
@@ -168,7 +171,9 @@ const StyledNumericalInput = styled(NumericalInput)<{ $loading: boolean }>`
   text-align: left;
 `
 
-const StyledPrefetchBalancesWrapper = styled(PrefetchBalancesWrapper)<{ $fullWidth: boolean }>`
+const StyledPrefetchBalancesWrapper = styled(PrefetchBalancesWrapper)<{
+  $fullWidth: boolean
+}>`
   width: ${({ $fullWidth }) => ($fullWidth ? '100%' : 'auto')};
 `
 

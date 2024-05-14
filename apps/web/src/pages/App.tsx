@@ -2,7 +2,7 @@ import { CustomUserProperties, getBrowser, SharedEventName } from '@uniswap/anal
 import { sendAnalyticsEvent, sendInitializationEvent, Trace, user } from 'analytics'
 import ErrorBoundary from 'components/ErrorBoundary'
 import Loader from 'components/Icons/LoadingSpinner'
-import NavBar, { PageTabs } from 'components/NavBar'
+import NavBar from 'components/NavBar'
 import { UK_BANNER_HEIGHT, UK_BANNER_HEIGHT_MD, UK_BANNER_HEIGHT_SM, UkBanner } from 'components/NavBar/UkBanner'
 import { useFeatureFlagURLOverrides } from 'featureFlags'
 import { useAtom } from 'jotai'
@@ -40,6 +40,17 @@ const BodyWrapper = styled.div<{ bannerIsVisible?: boolean }>`
   align-items: center;
   flex: 1;
 
+  & > .body-overlay {
+    position: absolute;
+    top: 0;
+    background: url('/uniswap-static/images/TVLineFx.jpg') no-repeat;
+    background-size: 100% 100%;
+
+    height: 100%;
+    width: 100%;
+    opacity: 0.25;
+  }
+
   @media only screen and (max-width: ${({ theme }) => `${theme.breakpoint.md}px`}) {
     min-height: calc(100vh - ${({ bannerIsVisible }) => (bannerIsVisible ? UK_BANNER_HEIGHT_MD : 0)}px);
   }
@@ -49,31 +60,35 @@ const BodyWrapper = styled.div<{ bannerIsVisible?: boolean }>`
   }
 `
 
-const MobileBottomBar = styled.div`
-  z-index: ${Z_INDEX.sticky};
-  position: fixed;
-  display: flex;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  width: calc(100vw - 16px);
-  justify-content: space-between;
-  padding: 0px 4px;
-  height: ${({ theme }) => theme.mobileBottomBarHeight}px;
-  background: ${({ theme }) => theme.surface1};
-  border: 1px solid ${({ theme }) => theme.surface3};
-  margin: 8px;
-  border-radius: 20px;
+// const MobileBottomBar = styled.div`
+//   z-index: ${Z_INDEX.sticky};
+//   position: fixed;
+//   display: flex;
+//   bottom: 0;
+//   right: 0;
+//   left: 0;
+//   width: calc(100vw - 16px);
+//   justify-content: space-between;
+//   padding: 0px 4px;
+//   height: ${({ theme }) => theme.mobileBottomBarHeight}px;
+//   background: ${({ theme }) => theme.surface1};
+//   border: 1px solid ${({ theme }) => theme.surface3};
+//   margin: 8px;
+//   border-radius: 20px;
 
-  @media screen and (min-width: ${({ theme }) => theme.breakpoint.md}px) {
-    display: none;
-  }
-`
+//   @media screen and (min-width: ${({ theme }) => theme.breakpoint.md}px) {
+//     display: none;
+//   }
+// `
 
-const HeaderWrapper = styled.div<{ transparent?: boolean; bannerIsVisible?: boolean; scrollY: number }>`
+const HeaderWrapper = styled.div<{
+  transparent?: boolean
+  bannerIsVisible?: boolean
+  scrollY: number
+}>`
   ${flexRowNoWrap};
-  background-color: ${({ theme, transparent }) => !transparent && theme.surface1};
-  border-bottom: ${({ theme, transparent }) => !transparent && `1px solid ${theme.surface3}`};
+  background-color: ${({ theme, transparent }) => (transparent ? theme.background : theme.background)};
+  border-bottom: ${({ theme, transparent }) => (transparent ? 'none' : `1px solid ${theme.background}`)};
   width: 100%;
   justify-content: space-between;
   position: fixed;
@@ -139,16 +154,16 @@ export default function App() {
           you can set it later in the page component itself, since react-helmet-async prefers the most recently rendered title.
         */}
         <Helmet>
-          <title>{findRouteByPath(pathname)?.getTitle(pathname) ?? 'Uniswap Interface'}</title>
+          <title>{findRouteByPath(pathname)?.getTitle(pathname) ?? 'Trinity'}</title>
         </Helmet>
         <UserPropertyUpdater />
         {renderUkBanner && <UkBanner />}
         <Header />
         <ResetPageScrollEffect />
         <Body />
-        <MobileBottomBar>
+        {/* <MobileBottomBar>
           <PageTabs />
-        </MobileBottomBar>
+        </MobileBottomBar> */}
       </Trace>
     </ErrorBoundary>
   )
@@ -160,6 +175,7 @@ const Body = memo(function Body() {
 
   return (
     <BodyWrapper bannerIsVisible={renderUkBanner}>
+      <div className="body-overlay"></div>
       <Suspense>
         <AppChrome />
       </Suspense>
@@ -264,7 +280,10 @@ function UserPropertyUpdater() {
     const sendWebVital =
       (metric: string) =>
       ({ delta }: Metric) =>
-        sendAnalyticsEvent(SharedEventName.WEB_VITALS, { ...pageLoadProperties, [metric]: delta })
+        sendAnalyticsEvent(SharedEventName.WEB_VITALS, {
+          ...pageLoadProperties,
+          [metric]: delta,
+        })
     getCLS(sendWebVital('cumulative_layout_shift'))
     getFCP(sendWebVital('first_contentful_paint_ms'))
     getFID(sendWebVital('first_input_delay_ms'))

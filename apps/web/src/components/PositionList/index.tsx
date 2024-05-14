@@ -6,6 +6,7 @@ import { MEDIA_WIDTHS } from 'theme'
 import { PositionDetails } from 'types/position'
 
 const DesktopHeader = styled.div`
+  font-family: ${({ theme }) => theme.fonts.code};
   display: none;
   font-size: 14px;
   padding: 16px;

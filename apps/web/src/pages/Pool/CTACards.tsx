@@ -40,6 +40,7 @@ const CTA = styled(ExternalLink)`
 `
 
 const HeaderText = styled(ThemedText.DeprecatedLabel)`
+  font-family: ${({ theme }) => theme.fonts.code};
   align-items: center;
   display: flex;
   font-size: 16px;

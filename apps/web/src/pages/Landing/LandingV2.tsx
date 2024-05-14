@@ -29,7 +29,7 @@ const Grain = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background: url(/images/noise-color.png);
+  background: url(/uniswap-static/images/noise-color.png);
   opacity: 0.018;
   z-index: 0;
 `

@@ -75,7 +75,9 @@ import { DynamicSection, MediumOnly, ResponsiveTwoColumns, ScrollablePage, Style
 const DEFAULT_ADD_IN_RANGE_SLIPPAGE_TOLERANCE = new Percent(50, 10_000)
 const blastRebasingAlertAtom = atomWithStorage<boolean>('shouldShowBlastRebasingAlert', true)
 
-const StyledBodyWrapper = styled(BodyWrapper)<{ $hasExistingPosition: boolean }>`
+const StyledBodyWrapper = styled(BodyWrapper)<{
+  $hasExistingPosition: boolean
+}>`
   padding: ${({ $hasExistingPosition }) => ($hasExistingPosition ? '10px' : 0)};
   max-width: 640px;
 `
@@ -502,7 +504,7 @@ function AddLiquidity() {
         properties={{ received_swap_quote: false }}
         element={InterfaceElementName.CONNECT_WALLET_BUTTON}
       >
-        <ButtonLight onClick={toggleWalletDrawer} $borderRadius="12px" padding="12px">
+        <ButtonLight onClick={toggleWalletDrawer} $borderRadius="12px" padding="12px" variant="primary">
           <Trans>Connect wallet</Trans>
         </ButtonLight>
       </TraceEvent>
@@ -641,9 +643,9 @@ function AddLiquidity() {
               <Row justify="flex-end" style={{ width: 'fit-content', minWidth: 'fit-content' }}>
                 <MediumOnly>
                   <ButtonText onClick={clearAll}>
-                    <ThemedText.DeprecatedBlue fontSize="12px">
+                    <ThemedText.DeprecatedWhite fontSize="12px">
                       <Trans>Clear all</Trans>
-                    </ThemedText.DeprecatedBlue>
+                    </ThemedText.DeprecatedWhite>
                   </ButtonText>
                 </MediumOnly>
               </Row>

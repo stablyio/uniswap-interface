@@ -56,7 +56,10 @@ const AddLiquidityHeaderContainer = styled(AutoColumn)`
 `
 
 export default function AddLiquidity() {
-  const { currencyIdA, currencyIdB } = useParams<{ currencyIdA?: string; currencyIdB?: string }>()
+  const { currencyIdA, currencyIdB } = useParams<{
+    currencyIdA?: string
+    currencyIdB?: string
+  }>()
   const navigate = useNavigate()
   const { account, chainId, provider } = useWeb3React()
 
@@ -378,7 +381,12 @@ export default function AddLiquidity() {
                 <ColumnCenter>
                   <BlueCard>
                     <AutoColumn gap="10px">
-                      <ThemedText.DeprecatedLink fontWeight={485} color="accent1">
+                      <ThemedText.DeprecatedLink
+                        fontWeight={485}
+                        color="white"
+                        fontFamily={theme.fonts.code}
+                        backgroundColor="surface1"
+                      >
                         <b>
                           <Trans>Tip:</Trans>
                         </b>{' '}
@@ -454,7 +462,7 @@ export default function AddLiquidity() {
                 properties={{ received_swap_quote: false }}
                 element={InterfaceElementName.CONNECT_WALLET_BUTTON}
               >
-                <ButtonLight onClick={toggleWalletDrawer}>
+                <ButtonLight onClick={toggleWalletDrawer} variant="primary">
                   <Trans>Connect wallet</Trans>
                 </ButtonLight>
               </TraceEvent>
@@ -518,7 +526,14 @@ export default function AddLiquidity() {
 
       {!addIsUnsupported ? (
         pair && !noLiquidity && pairState !== PairState.INVALID ? (
-          <AutoColumn style={{ minWidth: '20rem', width: '100%', maxWidth: '400px', marginTop: '1rem' }}>
+          <AutoColumn
+            style={{
+              minWidth: '20rem',
+              width: '100%',
+              maxWidth: '400px',
+              marginTop: '1rem',
+            }}
+          >
             <MinimalPositionCard showUnwrapped={oneCurrencyIsWETH} pair={pair} />
           </AutoColumn>
         ) : null

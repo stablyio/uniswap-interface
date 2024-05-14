@@ -13,6 +13,7 @@ import { Text } from 'rebass'
 import { StyledInternalLink, ThemedText } from 'theme/components'
 
 import { CurrencySearchFilters } from 'components/SearchModal/CurrencySearch'
+import { useTheme } from 'styled-components'
 import { ButtonDropdownLight } from '../../components/Button'
 import { BlueCard, LightCard } from '../../components/Card'
 import { AutoColumn, ColumnCenter } from '../../components/Column'
@@ -45,6 +46,7 @@ const POOLFINDER_CURRENCY_SEARCH_FILTERS: CurrencySearchFilters = {
 
 export default function PoolFinder() {
   const query = useQuery()
+  const theme = useTheme()
 
   const { account, chainId } = useWeb3React()
 
@@ -91,7 +93,7 @@ export default function PoolFinder() {
 
   const prerequisiteMessage = (
     <LightCard padding="45px 10px">
-      <Text textAlign="center">
+      <Text textAlign="center" fontFamily={theme.fonts.code}>
         {!account ? (
           <Trans>Connect to a wallet to find pools</Trans>
         ) : (
@@ -128,12 +130,12 @@ export default function PoolFinder() {
               {currency0 ? (
                 <Row>
                   <CurrencyLogo currency={currency0} />
-                  <Text fontWeight={535} fontSize={20} marginLeft="12px">
+                  <Text fontWeight={535} fontSize={20} marginLeft="12px" fontFamily={theme.fonts.code}>
                     {currency0.symbol}
                   </Text>
                 </Row>
               ) : (
-                <Text fontWeight={535} fontSize={20} marginLeft="12px">
+                <Text fontWeight={535} fontSize={20} marginLeft="12px" fontFamily={theme.fonts.code}>
                   <Trans>Select a token</Trans>
                 </Text>
               )}
@@ -152,12 +154,12 @@ export default function PoolFinder() {
               {currency1 ? (
                 <Row>
                   <CurrencyLogo currency={currency1} />
-                  <Text fontWeight={535} fontSize={20} marginLeft="12px">
+                  <Text fontWeight={535} fontSize={20} marginLeft="12px" fontFamily={theme.fonts.code}>
                     {currency1.symbol}
                   </Text>
                 </Row>
               ) : (
-                <Text fontWeight={535} fontSize={20} marginLeft="12px">
+                <Text fontWeight={535} fontSize={20} marginLeft="12px" fontFamily={theme.fonts.code}>
                   <Trans>Select a token</Trans>
                 </Text>
               )}
@@ -165,13 +167,18 @@ export default function PoolFinder() {
 
             {hasPosition && (
               <ColumnCenter
-                style={{ justifyItems: 'center', backgroundColor: '', padding: '12px 0px', borderRadius: '12px' }}
+                style={{
+                  justifyItems: 'center',
+                  backgroundColor: '',
+                  padding: '12px 0px',
+                  borderRadius: '12px',
+                }}
               >
-                <Text textAlign="center" fontWeight={535}>
+                <Text textAlign="center" fontWeight={535} fontFamily={theme.fonts.code}>
                   <Trans>Pool found!</Trans>
                 </Text>
                 <StyledInternalLink to="pools/v2">
-                  <Text textAlign="center">
+                  <Text textAlign="center" fontFamily={theme.fonts.code}>
                     <Trans>Manage this pool.</Trans>
                   </Text>
                 </StyledInternalLink>
@@ -185,11 +192,11 @@ export default function PoolFinder() {
                 ) : (
                   <LightCard padding="45px 10px">
                     <AutoColumn gap="sm" justify="center">
-                      <Text textAlign="center">
+                      <Text textAlign="center" fontFamily={theme.fonts.code}>
                         <Trans>You don’t have liquidity in this pool yet.</Trans>
                       </Text>
                       <StyledInternalLink to={`/add/v2/${currencyId(currency0)}/${currencyId(currency1)}`}>
-                        <Text textAlign="center">
+                        <Text textAlign="center" fontFamily={theme.fonts.code}>
                           <Trans>Add liquidity.</Trans>
                         </Text>
                       </StyledInternalLink>
@@ -199,7 +206,7 @@ export default function PoolFinder() {
               ) : validPairNoLiquidity ? (
                 <LightCard padding="45px 10px">
                   <AutoColumn gap="sm" justify="center">
-                    <Text textAlign="center">
+                    <Text textAlign="center" fontFamily={theme.fonts.code}>
                       <Trans>No pool found.</Trans>
                     </Text>
                     <StyledInternalLink to={`/add/${currencyId(currency0)}/${currencyId(currency1)}`}>

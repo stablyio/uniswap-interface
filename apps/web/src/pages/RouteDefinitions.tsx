@@ -81,7 +81,7 @@ export interface RouteDefinition {
 function createRouteDefinition(route: Partial<RouteDefinition>): RouteDefinition {
   return {
     getElement: () => null,
-    getTitle: () => 'Uniswap Interface',
+    getTitle: () => 'Trinity',
     enabled: () => true,
     path: '/',
     nestedPaths: [],
@@ -295,7 +295,10 @@ export const routes: RouteDefinition[] = [
     enabled: (args) => !args.shouldDisableNFTRoutes,
     getTitle: () => t`Explore NFTs on Uniswap`,
   }),
-  createRouteDefinition({ path: '*', getElement: () => <Navigate to="/not-found" replace /> }),
+  createRouteDefinition({
+    path: '*',
+    getElement: () => <Navigate to="/not-found" replace />,
+  }),
   createRouteDefinition({ path: '/not-found', getElement: () => <NotFound /> }),
 ]
 

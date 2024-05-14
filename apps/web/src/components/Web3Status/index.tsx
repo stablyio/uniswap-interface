@@ -22,7 +22,10 @@ import styled from 'styled-components'
 import { flexRowNoWrap } from 'theme/styles'
 import { shortenAddress } from 'utilities/src/addresses'
 
+import { ReactComponent as WalletIcon } from 'assets/wallets/wallet.svg'
+import { HeaderButton } from 'components/NavBar/HeaderButton'
 import { PrefetchBalancesWrapper } from 'graphql/data/apollo/TokenBalancesProvider'
+import { Box } from 'nft/components/Box'
 import { Unitag } from 'ui/src/components/icons/Unitag'
 import { useUnitagByAddressWithoutFlag } from 'uniswap/src/features/unitags/hooksWithoutFlags'
 import { ButtonSecondary } from '../Button'
@@ -51,17 +54,17 @@ const Web3StatusGeneric = styled(ButtonSecondary)`
 const Web3StatusConnectWrapper = styled.div`
   ${flexRowNoWrap};
   align-items: center;
-  background-color: ${({ theme }) => theme.accent2};
-  border-radius: ${FULL_BORDER_RADIUS}px;
+  background-color: ${({ theme }) => theme.surface1};
+  border-radius: 8px;
   border: none;
   padding: 0;
-  height: 40px;
+  height: 36px;
 
-  color: ${({ theme }) => theme.accent1};
+  color: ${({ theme }) => theme.white};
   :hover {
-    color: ${({ theme }) => theme.accent1};
+    color: ${({ theme }) => theme.white};
     stroke: ${({ theme }) => theme.accent2};
-    background-color: ${({ theme }) => darken(0.015, theme.accent2)};
+    background-color: ${({ theme }) => darken(0.015, theme.surface1)};
   }
 
   transition: ${({
@@ -80,7 +83,7 @@ const Web3StatusConnected = styled(Web3StatusGeneric)<{
   :hover,
   :focus {
     border: 1px solid ${({ theme }) => theme.surface2};
-    background-color: ${({ pending, theme }) => (pending ? theme.accent2 : theme.surface2)};
+    // background-color: ${({ pending, theme }) => (pending ? theme.accent2 : theme.surface2)};
 
     :focus {
       border: 1px solid ${({ pending, theme }) => (pending ? darken(0.1, theme.accent1) : darken(0.1, theme.surface3))};
@@ -123,17 +126,18 @@ const Text = styled.span`
   font-weight: 485;
 `
 
-const StyledConnectButton = styled.button`
-  background-color: transparent;
-  border: none;
-  border-top-left-radius: ${FULL_BORDER_RADIUS}px;
-  border-bottom-left-radius: ${FULL_BORDER_RADIUS}px;
-  cursor: pointer;
-  font-weight: 535;
-  font-size: 16px;
-  padding: 10px 12px;
-  color: inherit;
-`
+// const StyledConnectButton = styled.button`
+//   font-family: ${({ theme }) => theme.fonts.code};
+//   background-color: transparent;
+//   border: none;
+//   border-top-left-radius: ${FULL_BORDER_RADIUS}px;
+//   border-bottom-left-radius: ${FULL_BORDER_RADIUS}px;
+//   cursor: pointer;
+//   font-weight: 535;
+//   font-size: 16px;
+//   padding: 10px 12px;
+//   color: inherit;
+// `
 
 function Web3StatusInner() {
   const switchingChain = useAppSelector((state) => state.wallets.switchingChain)
@@ -177,7 +181,12 @@ function Web3StatusInner() {
     if (account || ENSName) {
       const { rdns } = connection.getProviderInfo()
       dispatch(
-        updateRecentConnectionMeta({ type: connection.type, address: account, ENSName: ENSName ?? undefined, rdns })
+        updateRecentConnectionMeta({
+          type: connection.type,
+          address: account,
+          ENSName: ENSName ?? undefined,
+          rdns,
+        })
       )
     }
   }, [ENSName, account, connection, dispatch])
@@ -239,9 +248,14 @@ function Web3StatusInner() {
           onKeyPress={(e) => e.key === 'Enter' && handleWalletDropdownClick()}
           onClick={handleWalletDropdownClick}
         >
-          <StyledConnectButton tabIndex={-1} data-testid="navbar-connect-wallet">
-            <Trans>Connect</Trans>
-          </StyledConnectButton>
+          {/* <StyledConnectButton tabIndex={-1} data-testid="navbar-connect-wallet"> */}
+          <HeaderButton id="navbar-connect-wallet" data-testid="navbar-connect-wallet">
+            <WalletIcon />
+            <Box display={{ sm: 'none', md: 'flex' }}>
+              <Trans>Connect</Trans>
+            </Box>
+          </HeaderButton>
+          {/* </StyledConnectButton> */}
         </Web3StatusConnectWrapper>
       </TraceEvent>
     )

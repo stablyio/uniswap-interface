@@ -59,6 +59,7 @@ export function FindPoolTabs({ origin }: { origin: string }) {
 }
 
 const AddRemoveTitleText = styled(ThemedText.H1Small)<{ $center: boolean }>`
+  font-family: ${({ theme }) => theme.fonts.code};
   flex: 1;
   margin: auto;
   text-align: ${({ $center }) => ($center ? 'center' : 'start')};

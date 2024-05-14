@@ -26,7 +26,7 @@ const Slider = styled(motion.div)`
 `
 const Label = styled.span`
   color: ${(props) => props.color};
-  font-family: Basel;
+  font-family: 'Courier New';
   font-size: 20px;
   @media (max-width: 1024px) {
     font-size: 18px;

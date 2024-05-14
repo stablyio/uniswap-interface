@@ -20,6 +20,7 @@ export const BreadcrumbNavContainer = styled.nav`
   gap: 4px;
   margin-bottom: 20px;
   width: fit-content;
+  z-index: 2;
 `
 
 export const BreadcrumbNavLink = styled(Link)`

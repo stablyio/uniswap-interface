@@ -1,7 +1,7 @@
 import Row from 'components/Row'
 import { Trans } from 'i18n'
 import { atom, useAtom } from 'jotai'
-import { atomWithStorage, useAtomValue, useUpdateAtom } from 'jotai/utils'
+import { atomWithStorage, useUpdateAtom } from 'jotai/utils'
 import ms from 'ms'
 import { useCallback, useEffect, useMemo } from 'react'
 import { Moon, Sun } from 'react-feather'
@@ -30,12 +30,13 @@ const themeModeAtom = atomWithStorage<ThemeMode>('interface_color_theme', ThemeM
 export function SystemThemeUpdater() {
   const setSystemTheme = useUpdateAtom(systemThemeAtom)
 
-  const listener = useCallback(
-    (event: MediaQueryListEvent) => {
-      setSystemTheme(event.matches ? ThemeMode.DARK : ThemeMode.LIGHT)
-    },
-    [setSystemTheme]
-  )
+  const listener = useCallback(() => {
+    setSystemTheme(ThemeMode.DARK)
+    // avoid using the system theme
+    // (event: MediaQueryListEvent) => {
+    //   setSystemTheme(event.matches ? ThemeMode.DARK : ThemeMode.LIGHT)
+    // },
+  }, [setSystemTheme])
 
   useEffect(() => {
     addMediaQueryListener(DARKMODE_MEDIA_QUERY, listener)
@@ -64,10 +65,12 @@ export function ThemeColorMetaUpdater() {
 }
 
 export function useIsDarkMode(): boolean {
-  const mode = useAtomValue(themeModeAtom)
-  const systemTheme = useAtomValue(systemThemeAtom)
+  // const mode = useAtomValue(themeModeAtom);
+  // const systemTheme = useAtomValue(systemThemeAtom);
 
-  return (mode === ThemeMode.AUTO ? systemTheme : mode) === ThemeMode.DARK
+  // return (mode === ThemeMode.AUTO ? systemTheme : mode) === ThemeMode.DARK;
+  // always use dark mode since we don't have a light mode
+  return true
 }
 
 export function useDarkModeManager(): [boolean, (mode: ThemeMode) => void] {

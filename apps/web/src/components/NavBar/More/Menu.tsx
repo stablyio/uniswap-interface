@@ -1,18 +1,18 @@
 import Column from 'components/Column'
 import { ScrollBarStyles } from 'components/Common'
-import Row from 'components/Row'
-import { Trans } from 'i18n'
-import { Socials } from 'pages/Landing/sections/Footer'
+// import Row from 'components/Row';
+// import { Trans } from 'i18n';
+// import { Socials } from 'pages/Landing/sections/Footer';
 import { Link } from 'react-router-dom'
-import { Text } from 'rebass'
-import { useOpenModal } from 'state/application/hooks'
-import { ApplicationModal } from 'state/application/reducer'
+// import { Text } from 'rebass';
+// import { useOpenModal } from 'state/application/hooks';
+// import { ApplicationModal } from 'state/application/reducer';
 import styled, { css } from 'styled-components'
 import { BREAKPOINTS } from 'theme'
 import { ExternalLink, ThemedText } from 'theme/components'
 
 import { MenuItem, MenuSection, useMenuContent } from './menuContent'
-import { MobileAppLogo } from './MobileAppLogo'
+// import { MobileAppLogo } from './MobileAppLogo';
 
 const Container = styled.div`
   width: 295px;
@@ -57,20 +57,20 @@ const StyledInternalLink = styled(Link)<{ canHide?: boolean }>`
 const StyledExternalLink = styled(ExternalLink)`
   ${LinkStyles}
 `
-const Separator = styled.div`
-  width: 100%;
-  height: 1px;
-  background: ${({ theme }) => theme.surface3};
-`
-const StyledRow = styled(Row)`
-  cursor: pointer;
-  :hover {
-    color: ${({ theme }) => theme.accent1};
-  }
-`
-const StyledSocials = styled(Socials)`
-  height: 20px;
-`
+// const Separator = styled.div`
+//   width: 100%;
+//   height: 1px;
+//   background: ${({ theme }) => theme.surface3};
+// `
+// const StyledRow = styled(Row)`
+//   cursor: pointer;
+//   :hover {
+//     color: ${({ theme }) => theme.accent1};
+//   }
+// `;
+// const StyledSocials = styled(Socials)`
+//   height: 20px;
+// `;
 function Item({ label, href, internal, overflow, closeMenu }: MenuItem) {
   return internal ? (
     <StyledInternalLink to={href} canHide={overflow} onClick={closeMenu}>
@@ -80,6 +80,7 @@ function Item({ label, href, internal, overflow, closeMenu }: MenuItem) {
     <StyledExternalLink href={href}>{label}</StyledExternalLink>
   )
 }
+
 function Section({ title, items, closeMenu }: MenuSection) {
   return (
     <Column gap="sm">
@@ -98,7 +99,7 @@ function Section({ title, items, closeMenu }: MenuSection) {
   )
 }
 export function Menu({ close }: { close: () => void }) {
-  const openGetTheAppModal = useOpenModal(ApplicationModal.GET_THE_APP)
+  // const openGetTheAppModal = useOpenModal(ApplicationModal.GET_THE_APP);
   const menuContent = useMenuContent()
 
   return (
@@ -112,13 +113,13 @@ export function Menu({ close }: { close: () => void }) {
             closeMenu={close}
           />
         ))}
-        <Separator />
+        {/* <Separator />
         <StyledRow
           height="45px"
           gap="md"
           onClick={() => {
-            close()
-            openGetTheAppModal()
+            close();
+            openGetTheAppModal();
           }}
         >
           <MobileAppLogo />
@@ -131,7 +132,7 @@ export function Menu({ close }: { close: () => void }) {
             </ThemedText.LabelSmall>
           </Column>
         </StyledRow>
-        <StyledSocials iconSize="25px" />
+        <StyledSocials iconSize="25px" /> */}
       </Column>
     </Container>
   )

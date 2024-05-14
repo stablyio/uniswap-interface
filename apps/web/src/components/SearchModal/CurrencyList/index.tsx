@@ -124,7 +124,7 @@ function TokenTags({ currency }: { currency: Currency }) {
 }
 
 const RowWrapper = styled(Row)`
-  height: 60px;
+  height: 56px;
 `
 
 export function CurrencyRow({
@@ -167,7 +167,11 @@ export function CurrencyRow({
     <TraceEvent
       events={[BrowserEvent.onClick, BrowserEvent.onKeyPress]}
       name={InterfaceEventName.TOKEN_SELECTED}
-      properties={{ is_imported_by_user: customAdded, ...eventProperties, total_balances_usd: portfolioBalanceUsd }}
+      properties={{
+        is_imported_by_user: customAdded,
+        ...eventProperties,
+        total_balances_usd: portfolioBalanceUsd,
+      }}
       element={InterfaceElementName.TOKEN_SELECTOR_ROW}
     >
       <Wrapper

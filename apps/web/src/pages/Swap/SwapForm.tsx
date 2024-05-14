@@ -331,7 +331,11 @@ export function SwapForm({ disableTokenInputs = false, onCurrencyChange }: SwapF
   )
   const showMaxButton = Boolean(maxInputAmount?.greaterThan(0) && !parsedAmounts[Field.INPUT]?.equalTo(maxInputAmount))
   const swapFiatValues = useMemo(() => {
-    return { amountIn: fiatValueTradeInput.data, amountOut: fiatValueTradeOutput.data, feeUsd: outputFeeFiatValue }
+    return {
+      amountIn: fiatValueTradeInput.data,
+      amountOut: fiatValueTradeOutput.data,
+      feeUsd: outputFeeFiatValue,
+    }
   }, [fiatValueTradeInput.data, fiatValueTradeOutput.data, outputFeeFiatValue])
 
   // the callback to execute the swap
@@ -418,11 +422,17 @@ export function SwapForm({ disableTokenInputs = false, onCurrencyChange }: SwapF
 
     const marketPriceImpact = trade?.priceImpact ? computeRealizedPriceImpact(trade) : undefined
     const largerPriceImpact = largerPercentValue(marketPriceImpact, preTaxStablecoinPriceImpact)
-    return { priceImpactSeverity: warningSeverity(largerPriceImpact), largerPriceImpact }
+    return {
+      priceImpactSeverity: warningSeverity(largerPriceImpact),
+      largerPriceImpact,
+    }
   }, [preTaxStablecoinPriceImpact, trade])
 
   const handleConfirmDismiss = useCallback(() => {
-    setSwapFormState((currentState) => ({ ...currentState, showConfirm: false }))
+    setSwapFormState((currentState) => ({
+      ...currentState,
+      showConfirm: false,
+    }))
     // If there was a swap, we want to clear the input
     if (swapResult) {
       onUserInput(Field.INPUT, '')
@@ -430,7 +440,10 @@ export function SwapForm({ disableTokenInputs = false, onCurrencyChange }: SwapF
   }, [onUserInput, swapResult])
 
   const handleAcceptChanges = useCallback(() => {
-    setSwapFormState((currentState) => ({ ...currentState, tradeToConfirm: trade }))
+    setSwapFormState((currentState) => ({
+      ...currentState,
+      tradeToConfirm: trade,
+    }))
   }, [trade])
 
   const handleInputSelect = useCallback(
@@ -616,10 +629,12 @@ export function SwapForm({ disableTokenInputs = false, onCurrencyChange }: SwapF
             <TraceEvent
               events={[BrowserEvent.onClick]}
               name={InterfaceEventName.CONNECT_WALLET_BUTTON_CLICKED}
-              properties={{ received_swap_quote: getIsReviewableQuote(trade, tradeState, swapInputError) }}
+              properties={{
+                received_swap_quote: getIsReviewableQuote(trade, tradeState, swapInputError),
+              }}
               element={InterfaceElementName.CONNECT_WALLET_BUTTON}
             >
-              <ButtonLight onClick={toggleWalletDrawer} fontWeight={535} $borderRadius="16px">
+              <ButtonLight onClick={toggleWalletDrawer} fontWeight={535} $borderRadius="16px" variant="primary">
                 <Trans>Connect wallet</Trans>
               </ButtonLight>
             </TraceEvent>
@@ -678,7 +693,7 @@ export function SwapForm({ disableTokenInputs = false, onCurrencyChange }: SwapF
                 disabled={!getIsReviewableQuote(trade, tradeState, swapInputError)}
                 error={!swapInputError && priceImpactSeverity > 2 && allowance.state === AllowanceState.ALLOWED}
               >
-                <Text fontSize={20}>
+                <Text fontSize={20} fontFamily={theme.fonts.code}>
                   {swapInputError ? (
                     swapInputError
                   ) : routeIsSyncing || routeIsLoading ? (

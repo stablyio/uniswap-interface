@@ -31,6 +31,7 @@ const PageWrapper = styled(Container)`
   flex: 1;
   justify-content: center;
   gap: 50px;
+  z-index: 2;
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoint.md}px) {
     justify-content: space-between;

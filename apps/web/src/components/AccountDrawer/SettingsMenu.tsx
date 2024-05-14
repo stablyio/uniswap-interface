@@ -8,7 +8,7 @@ import { ReactNode } from 'react'
 import { ChevronRight } from 'react-feather'
 import styled from 'styled-components'
 import { ClickableStyle, ThemedText } from 'theme/components'
-import ThemeToggle from 'theme/components/ThemeToggle'
+// import ThemeToggle from 'theme/components/ThemeToggle'
 import { FeatureFlags } from 'uniswap/src/features/experiments/flags'
 import { useFeatureFlag } from 'uniswap/src/features/experiments/hooks'
 import { AnalyticsToggle } from './AnalyticsToggle'
@@ -90,7 +90,7 @@ export default function SettingsMenu({
             <Trans>Preferences</Trans>
           </SectionTitle>
           <ToggleWrapper currencyConversionEnabled={currencyConversionEnabled}>
-            <ThemeToggle />
+            {/* <ThemeToggle /> */}
             <SmallBalanceToggle />
             <SpamToggle />
             <AnalyticsToggle />

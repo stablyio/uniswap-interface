@@ -30,6 +30,8 @@ const PageWrapper = styled(AutoColumn)`
   padding: 68px 8px 0px;
   max-width: 870px;
   width: 100%;
+  font-family: ${({ theme }) => theme.fonts.code};
+  z-index: 2;
 
   @media (max-width: ${({ theme }) => `${theme.breakpoint.md}px`}) {
     max-width: 800px;
@@ -43,6 +45,7 @@ const PageWrapper = styled(AutoColumn)`
 `
 const TitleRow = styled(RowBetween)`
   color: ${({ theme }) => theme.neutral2};
+  font-family: ${({ theme }) => theme.fonts.code};
   @media (max-width: ${({ theme }) => `${theme.breakpoint.sm}px`}) {
     flex-wrap: wrap;
     gap: 12px;
@@ -320,7 +323,11 @@ export default function Pool() {
                       element={InterfaceElementName.CONNECT_WALLET_BUTTON}
                     >
                       <ButtonPrimary
-                        style={{ marginTop: '2em', marginBottom: '2em', padding: '8px 16px' }}
+                        style={{
+                          marginTop: '2em',
+                          marginBottom: '2em',
+                          padding: '8px 16px',
+                        }}
                         onClick={toggleWalletDrawer}
                       >
                         <Trans>Connect a wallet</Trans>

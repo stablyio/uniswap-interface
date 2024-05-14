@@ -17,6 +17,7 @@ const StyledMenuIcon = styled(MenuIcon)`
   path {
     stroke: ${({ theme }) => theme.neutral1};
   }
+  z-index: 2;
 `
 
 const StyledMenu = styled.div`

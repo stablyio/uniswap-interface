@@ -48,8 +48,8 @@ export type Theme = typeof themeContractValues
 export const themeVars = createGlobalThemeContract(themeContractValues, (_, path) => `genie-${path.join('-')}`)
 
 export const navDimensions = {
-  height: 72,
-  verticalPad: 20,
+  height: 48, // 72,
+  verticalPad: 8, // 20,
 }
 
 const dimensions = {
@@ -205,9 +205,9 @@ export const vars = createGlobalTheme(':root', {
     accentActive: '#FC72FF',
     //NEW COLORS FOR SPORE - need to define light/dark here cause they are root colors now (different system)
     neutral1_dark: '#FFFFFF',
-    neutral2_dark: '#9B9B9B',
+    neutral2_dark: '#757575',
     neutral3_dark: '#5E5E5E',
-    surface1_dark: '#131313',
+    surface1_dark: '#424242',
     surface2_dark: '#1B1B1B',
     surface3_dark: '#FFFFFF1f',
     surface4_dark: '#FFFFFF33',
@@ -278,6 +278,7 @@ export const vars = createGlobalTheme(':root', {
   fontWeight: {
     book: '485',
     medium: '535',
+    bold: '700',
   },
   time: {
     '125': '125ms',
@@ -285,8 +286,12 @@ export const vars = createGlobalTheme(':root', {
     '500': '500ms',
   },
   fonts: {
-    body: 'Inter, sans-serif',
-    heading: 'Adieu, sans-serif',
+    body: '"Courier New", Inter, sans-serif',
+    heading: '"Courier New", Adieu, sans-serif',
+  },
+  textShadow: {
+    none: 'none',
+    white: '0px 0px 10px #FFF',
   },
 })
 
@@ -400,6 +405,7 @@ const colorStyles = defineProperties({
     backgroundColor: vars.color,
     outlineColor: vars.color,
     fill: vars.color,
+    textShadow: vars.textShadow,
   },
 })
 
@@ -432,7 +438,11 @@ const unresponsiveProperties = defineProperties({
     overflow,
     overflowX: overflow,
     overflowY: overflow,
-    boxShadow: { ...themeVars.shadows, none: 'none', dropShadow: vars.color.dropShadow },
+    boxShadow: {
+      ...themeVars.shadows,
+      none: 'none',
+      dropShadow: vars.color.dropShadow,
+    },
     transition: vars.time,
     transitionDuration: vars.time,
     animationDuration: vars.time,

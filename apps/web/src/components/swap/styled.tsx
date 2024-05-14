@@ -11,6 +11,7 @@ export const PageWrapper = styled.div`
   padding: 68px 8px 0px;
   max-width: 480px;
   width: 100%;
+  z-index: 2;
 
   @media only screen and (max-width: ${({ theme }) => `${theme.breakpoint.md}px`}) {
     padding-top: 48px;

@@ -6,10 +6,15 @@ import { sprinkles, vars } from '../../nft/css/sprinkles.css'
 export const logoContainer = style([
   sprinkles({
     display: 'flex',
-    marginRight: '12',
+    marginRight: '32',
+    marginLeft: '0',
     alignItems: 'center',
     cursor: 'pointer',
   }),
+  {
+    transition: '0.3s ease all',
+    ':hover': { opacity: 0.7 },
+  },
 ])
 
 export const logo = style([
@@ -73,12 +78,14 @@ const baseMenuItem = style([
     alignItems: 'center',
     justifyContent: 'center',
     gap: '4',
+    fontWeight: 'bold',
   }),
   {
     lineHeight: '22px',
     textDecoration: 'none',
     ':hover': {
-      background: vars.color.lightGrayOverlay,
+      textShadow: '0px 0px 10px #FFF',
+      color: vars.color.white,
     },
   },
 ])
@@ -95,5 +102,6 @@ export const activeMenuItem = style([
   sprinkles({
     color: 'neutral1',
     background: 'none',
+    textShadow: 'white',
   }),
 ])

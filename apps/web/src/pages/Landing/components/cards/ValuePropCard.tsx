@@ -66,7 +66,7 @@ const Inner = styled.div<{ alignTextToBottom?: boolean }>`
 const Title = styled.div`
   color: ${(props) => props.color};
   font-feature-settings: 'ss07' on;
-  font-family: Basel;
+  font-family: 'Courier New';
   font-size: 36px;
   font-style: normal;
   font-weight: 500;

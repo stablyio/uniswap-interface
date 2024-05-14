@@ -21,13 +21,12 @@ const PoolOptionsButton = styled(ButtonGray)<{ $isOpen: boolean }>`
   flex: 1 1 auto;
   padding: 6px 8px 6px 12px;
   width: 100%;
-  background-color: ${({ theme }) => theme.surface3};
-  border: none;
+  background-color: ${({ theme }) => theme.surface1};
+  border: ${({ theme }) => `1px solid ${theme.surface1}`};
   border-radius: 8px;
   gap: 6px;
 
   &:hover {
-    background-color: ${({ theme, $isOpen }) => ($isOpen ? theme.surface1 : theme.surface3)};
     opacity: 0.9;
   }
 

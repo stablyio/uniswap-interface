@@ -68,15 +68,15 @@ interface CurrencySelectProps {
 
 export const CurrencySelect = styled(ButtonGray)<CurrencySelectProps>`
   align-items: center;
-  background-color: ${({ selected, theme }) => (selected ? theme.surface1 : theme.accent1)};
+  background-color: ${({ selected, theme }) => (selected ? theme.surface5 : theme.surface5)};
   opacity: ${({ disabled }) => (!disabled ? 1 : 0.4)};
-  color: ${({ selected, theme }) => (selected ? theme.neutral1 : theme.neutralContrast)};
+  color: ${({ selected, theme }) => (selected ? theme.neutral1 : theme.neutral1)};
   cursor: pointer;
   height: 36px;
   border-radius: 18px;
   outline: none;
   user-select: none;
-  border: 1px solid ${({ selected, theme }) => (selected ? theme.surface3 : theme.accent1)};
+  border: 1px solid ${({ selected, theme }) => (selected ? theme.surface3 : theme.surface3)};
   font-size: 24px;
   font-weight: 485;
   width: ${({ hideInput }) => (hideInput ? '100%' : 'initial')};
@@ -88,7 +88,7 @@ export const CurrencySelect = styled(ButtonGray)<CurrencySelectProps>`
 
   &:hover,
   &:active {
-    background-color: ${({ theme, selected }) => (selected ? theme.surface2 : theme.accent1)};
+    background-color: ${({ theme, selected }) => (selected ? theme.surface2 : theme.surface2)};
   }
 
   &:before {
@@ -191,6 +191,7 @@ const StyledTokenName = styled.span<{ active?: boolean }>`
   ${({ active }) => (active ? '  margin: 0 0.25rem 0 0.25rem;' : '  margin: 0 0.25rem 0 0.25rem;')}
   font-size: 20px;
   font-weight: 535;
+  font-family: ${({ theme }) => theme.fonts.code};
 `
 
 const StyledBalanceMax = styled.button<{ disabled?: boolean }>`
